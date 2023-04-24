@@ -1,12 +1,14 @@
 package ru.otus.cars
 
 fun main() {
-    println("===> drive cars...")
+    println("\n===> drive cars...")
     driveCars()
-    println("===> inner test...")
+    println("\n===> inner test...")
     innerNestedCheck()
-    println("===> garage make...")
+    println("\n===> garage make...")
     garageMake()
+    println("\n===> model special...")
+    modelSpecial()
 }
 
 fun driveCars() {
@@ -41,4 +43,18 @@ fun garageMake() {
 
     val vaz = garage.buildCar(Car.Plates("500", 50))
     println(vaz.toString())
+}
+
+fun modelSpecial() {
+    val cars = listOf(
+        Vaz2107.build(Car.Plates("123", 77)),
+        Vaz2108.build(Car.Plates("321", 78))
+    )
+
+    cars.forEach { car ->
+        when(car) {
+            is Vaz2107 -> car.drdrdrdrdr()
+            is Vaz2108 -> car.zhzhzhzh()
+        }
+    }
 }

@@ -3,7 +3,7 @@ package ru.otus.cars
 /**
  * Машина целиком
  */
-interface Car : CarInput {
+sealed interface Car : CarInput {
     /**
      * Номерной знак
      */
