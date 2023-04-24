@@ -1,5 +1,7 @@
 package ru.otus.cars
 
+import kotlin.random.Random
+
 /**
  * Восьмерка
  */
@@ -10,6 +12,15 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
     companion object : CarBuilder {
         override fun build(plates: Car.Plates): Vaz2108 = Vaz2108("Красный").apply {
             this.plates = plates
+        }
+
+        /**
+         * Сход-развал
+         */
+        fun alignWheels(vaz2108: Vaz2108) {
+            println("${MODEL}: Положение руля до: ${vaz2108.wheelAngle}")
+            vaz2108.wheelAngle = Random.nextInt(-180, 180)
+            println("${MODEL}: Положение руля после: ${vaz2108.wheelAngle}")
         }
 
         /**

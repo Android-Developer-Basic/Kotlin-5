@@ -18,7 +18,9 @@ class Vaz2107 private constructor(color: String) : VazPlatform(color) {
          * Проверь, ездит или нет
          */
         fun test(vaz2107: Vaz2107) {
+            println("${MODEL}: Проверка движка...")
             vaz2107.currentSpeed = Random.nextInt(0, 60)
+            println("${MODEL}: Скорость: ${vaz2107.carOutput.getCurrentSpeed()}")
         }
 
         /**

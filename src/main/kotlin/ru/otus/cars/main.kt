@@ -13,6 +13,8 @@ fun main() {
     getEquipment()
     println("\n===> get color...")
     getColor()
+    println("\n===> model make...")
+    modelMake()
 }
 
 fun driveCars() {
@@ -85,4 +87,13 @@ fun getColor() {
     cars.forEach { car ->
         println("Цвет: ${car.color}")
     }
+}
+
+fun modelMake() {
+    val vaz1 = Togliatti.buildCar(Vaz2107, Car.Plates("123", 77))
+    val vaz2 = Togliatti.buildCar(Vaz2108, Car.Plates("321", 78))
+
+    println("Создали машины:")
+    println(vaz1.toString()) // 2107
+    println(vaz2.toString()) // 2108
 }
