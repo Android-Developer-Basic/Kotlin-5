@@ -52,13 +52,15 @@ fun garageMake() {
 fun modelSpecial() {
     val cars = listOf(
         Vaz2107.build(Car.Plates("123", 77)),
-        Vaz2108.build(Car.Plates("321", 78))
+        Vaz2108.build(Car.Plates("321", 78)),
+        Taz
     )
 
     cars.forEach { car ->
         when(car) {
             is Vaz2107 -> car.drdrdrdrdr()
             is Vaz2108 -> car.zhzhzhzh()
+            Taz -> println("Таз больше не ездит!")
         }
     }
 }
