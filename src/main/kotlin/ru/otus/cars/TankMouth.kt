@@ -1,13 +1,13 @@
 package ru.otus.cars
 
-import kotlin.random.Random
 
-abstract class TankMouth: Tank {
+sealed class TankMouth {
     open fun open() {}
     open fun close() {}
 }
 
-class PetrolMouth : TankMouth() {
+//
+open class PetrolMouth : TankMouth() {
     override fun open() {
         println("Бак открыт, идет заправка Бензином")
     }
@@ -15,24 +15,11 @@ class PetrolMouth : TankMouth() {
     override fun close() {
         println("Заправка Газом закончина, бак Бензином")
     }
-    override val mouth: TankMouth = this
-    override fun getContents(): Int {
-        return fuel
-    }
 
-    override fun receiveFuel(liters: Int) {
-        fuelPetrol(liters)
-    }
-
-    private var fuel : Int = Random.nextInt(0,25)
-    private fun fuelPetrol(liters: Int) {
-        open()
-        fuel += liters
-        close()
-    }
+    open fun fuelPetrol(liters: Int) {}
 }
 
-class LpgMouth : TankMouth() {
+open class LpgMouth : TankMouth() {
     override fun open() {
         println("Бак открыт, идет заправка Газом")
     }
@@ -40,19 +27,5 @@ class LpgMouth : TankMouth() {
     override fun close() {
         println("Заправка Газом закончина, бак закрыт")
     }
-    override val mouth: TankMouth = this
-    override fun getContents(): Int {
-        return fuel
-    }
-
-    override fun receiveFuel(liters: Int) {
-        fuelLpg(liters)
-    }
-
-    private var fuel : Int = Random.nextInt(0,25)
-    private fun fuelLpg(liters: Int) {
-        open()
-        fuel += liters
-        close()
-    }
+    open fun fuelLpg(liters: Int) {}
 }

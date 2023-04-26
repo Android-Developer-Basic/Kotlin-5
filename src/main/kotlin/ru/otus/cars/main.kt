@@ -20,7 +20,10 @@ fun main() {
 //Заправка
 fun fuelStation(car: Car){
     try {
-        car.tankMouth.receiveFuel(Random.nextInt(0, 60))
+        when (car.tankMouth){
+            is PetrolMouth -> (car.tankMouth as PetrolMouth).fuelPetrol(Random.nextInt(0, 60))
+            is LpgMouth -> (car.tankMouth as LpgMouth).fuelLpg(Random.nextInt(0, 60))
+        }
     } catch (e: IllegalStateException) {
         println("Заправка обноружила $e, и ликвидировала его")
     }

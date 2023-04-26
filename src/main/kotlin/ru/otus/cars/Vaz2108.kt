@@ -12,7 +12,7 @@ class Vaz2108 private constructor() : Car {
     companion object : CarBuilder {
         override fun build(plates: Car.Plates): Vaz2108 = Vaz2108().apply {
             this.plates = plates
-            this.tankMouth = PetrolMouth()
+            this.tankMouth = VazMouth()
         }
 
         /**
@@ -53,7 +53,7 @@ class Vaz2108 private constructor() : Car {
 
     // Выводим состояние машины
     override fun toString(): String {
-        return "Vaz2108(plates=$plates, wheelAngle=$wheelAngle, currentSpeed=$currentSpeed, fuelContents=${tankMouth.getContents()})"
+        return "Vaz2108(plates=$plates, wheelAngle=$wheelAngle, currentSpeed=$currentSpeed, fuelContents=${tank.getContents()})"
     }
 
     /**
@@ -74,7 +74,29 @@ class Vaz2108 private constructor() : Car {
         }
 
         override fun getFuelContents(): Int {
-            return this@Vaz2108.tankMouth.getContents()
+            return this@Vaz2108.tank.getContents()
+        }
+    }
+
+    private val tank = object : Tank {
+        override val mouth: TankMouth
+            get() = tankMouth
+        private var fuel : Int = Random.nextInt(0,25)
+
+        override fun getContents(): Int {
+            return fuel
+        }
+
+        override fun receiveFuel(liters: Int) {
+            mouth.open()
+            fuel += liters
+            mouth.close()
+        }
+
+    }
+    open inner class VazMouth : PetrolMouth() {
+        override fun fuelPetrol(liters: Int) {
+            return this@Vaz2108.tank.receiveFuel(liters)
         }
     }
 }
