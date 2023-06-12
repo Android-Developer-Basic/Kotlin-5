@@ -37,6 +37,7 @@ class Vaz2108 private constructor() : Car {
         println("Ж-ж-ж-ж....")
     }
 
+    override val tankMouth = PetrolMouth()
     private var wheelAngle: Int = 0 // Положение руля
     private var currentSpeed: Int = 0 // Скока жмёт
 
@@ -49,7 +50,7 @@ class Vaz2108 private constructor() : Car {
 
     // Выводим состояние машины
     override fun toString(): String {
-        return "Vaz2108(plates=$plates, wheelAngle=$wheelAngle, currentSpeed=$currentSpeed)"
+        return "Vaz2108(plates=$plates, wheelAngle=$wheelAngle, currentSpeed=$currentSpeed, fuelLevel=$fuelContents)"
     }
 
     /**
@@ -61,12 +62,18 @@ class Vaz2108 private constructor() : Car {
 
     override fun wheelToLeft(degrees: Int) { wheelAngle -= degrees }
 
+    private var fuelContents = tankMouth.getFuelLevel()// Уровень топлива
+
+
     /**
      * Имеет доступ к внутренним данным ЭТОГО ВАЗ-2108!
      */
     inner class VazOutput : CarOutput {
         override fun getCurrentSpeed(): Int {
             return this@Vaz2108.currentSpeed
+        }
+        override fun getFuelContents(): Int {
+            return this@Vaz2108.fuelContents
         }
     }
 }

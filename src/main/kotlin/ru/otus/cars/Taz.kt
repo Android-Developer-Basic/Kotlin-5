@@ -15,6 +15,8 @@ object Taz : Car {
      */
     override val carOutput: CarOutput
         get() = throw IllegalStateException("Приборы сняты")
+    override val tankMouth: LpgMouth
+        get() = throw IllegalStateException("Бензобак взорвался")
 
     /**
      * Руль вправо на [degrees] градусов
@@ -29,4 +31,5 @@ object Taz : Car {
     override fun wheelToLeft(degrees: Int) {
         throw IllegalStateException("Руля нет")
     }
+
 }

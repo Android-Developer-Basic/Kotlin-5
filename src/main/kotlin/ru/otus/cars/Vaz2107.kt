@@ -18,6 +18,7 @@ class Vaz2107 private constructor() : Car {
          * Проверь, ездит или нет
          */
         fun test(vaz2107: Vaz2107) {
+            println(vaz2107.carOutput.getFuelContents())
             println("${MODEL}: Проверка движка...")
             vaz2107.currentSpeed = Random.nextInt(0, 60)
             println("${MODEL}: Скорость: ${vaz2107.carOutput.getCurrentSpeed()}")
@@ -40,6 +41,12 @@ class Vaz2107 private constructor() : Car {
     private var wheelAngle: Int = 0 // Положение руля
     private var currentSpeed: Int = 0 // Скока жмёт
 
+    override val tankMouth = LpgMouth()
+/**
+ * Здесь нужна особь функции fuelContents, которая будет возвращать состояние переменной contents
+ */
+    private var fuelContents: Int = tankMouth.getFuelLevel()// Уровень топлива
+
     /**
      * Доступно сборщику
      * @see [build]
@@ -47,9 +54,11 @@ class Vaz2107 private constructor() : Car {
     override lateinit var plates: Car.Plates
         private set
 
+
+
     // Выводим состояние машины
     override fun toString(): String {
-        return "Vaz2107(plates=$plates, wheelAngle=$wheelAngle, currentSpeed=$currentSpeed)"
+        return "Vaz2107(plates=$plates, wheelAngle=$wheelAngle, currentSpeed=$currentSpeed, fuelLevel=$fuelContents)"
     }
 
     /**
@@ -61,12 +70,16 @@ class Vaz2107 private constructor() : Car {
 
     override fun wheelToLeft(degrees: Int) { wheelAngle -= degrees }
 
+
     /**
      * Имеет доступ к внутренним данным ЭТОГО ВАЗ-2107!
      */
     inner class VazOutput : CarOutput {
         override fun getCurrentSpeed(): Int {
             return this@Vaz2107.currentSpeed
+        }
+        override fun getFuelContents(): Int {
+            return this@Vaz2107.fuelContents
         }
     }
 }
