@@ -39,7 +39,7 @@ fun refuelTaz() = GasStation.refuelCar(vaz210Taz, 10)
 /**
  * Заправляем вереницу автомобилей
  */
-fun refuelCortage() = GasStation.refuelMotorcade(carsCortege, 15)
+fun refuelCortage() = GasStation.refuelMotorcade(carsCortege, 70)
 
 /**
  * Заправляем Таз
