@@ -1,5 +1,7 @@
 package ru.otus.cars
 
+import kotlin.random.Random
+
 fun main() {
     println("\n===> drive cars...")
     driveCars()
@@ -11,6 +13,8 @@ fun main() {
     modelSpecial()
     println("\n===> model make...")
     modelMake()
+    println("\n===> model fuel...")
+    processFuel()
 }
 
 fun driveCars() {
@@ -55,7 +59,7 @@ fun modelSpecial() {
     )
 
     cars.forEach { car ->
-        when(car) {
+        when (car) {
             is Vaz2107 -> car.drdrdrdrdr()
             is Vaz2108 -> car.zhzhzhzh()
             Taz -> println("Таз больше не ездит!")
@@ -70,4 +74,38 @@ fun modelMake() {
     println("Создали машины:")
     println(vaz1.toString()) // 2107
     println(vaz2.toString()) // 2108
+}
+
+fun gasStation(car: Car) {
+    try {
+        when (car.carMouth) {
+            is PetrolMouth -> {
+                (car.carMouth as PetrolMouth).fuelPetrol(Random.nextInt(0, 60))
+            }
+
+            is LpgMouth -> {
+                (car.carMouth as LpgMouth).fuelLpg(Random.nextInt(0, 100))
+            }
+        }
+    } catch (e: Exception) {
+        println("Что-то погорело?")
+    }
+}
+
+fun processFuel() {
+    val cars = listOf(
+        Vaz2107.build(Car.Plates("123", 77)),
+        Vaz2108.build(Car.Plates("321", 78)),
+        Taz
+    )
+    cars.forEach { car ->
+        println(car.toString())
+        gasStation(car)
+    }
+    cars.forEach { car ->
+        if (car is Taz)
+            println("Такзик не заправляется, бака то нет.")
+        else
+            println("Уровень топлива: ${car.carOutput.getFuelLevel()}")
+    }
 }

@@ -1,5 +1,7 @@
 package ru.otus.cars
 
+import java.lang.IllegalArgumentException
+
 /**
  * Тачка не едет
  */
@@ -28,5 +30,15 @@ object Taz : Car {
      */
     override fun wheelToLeft(degrees: Int) {
         throw IllegalStateException("Руля нет")
+    }
+
+    /**
+     * Кто заправляет тазик?
+     */
+    override val carMouth: TankMouth
+        get() = throw IllegalArgumentException("Бабах")
+
+    override fun toString(): String {
+        return "Тазик"
     }
 }
