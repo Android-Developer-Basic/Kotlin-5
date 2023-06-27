@@ -35,4 +35,8 @@ object Taz : Car {
     override fun wheelToLeft(degrees: Int) {
         throw IllegalStateException("Руля нет")
     }
+
+    override fun toString(): String {
+        return "TAZ=(..это ТАЗ, дедка)"
+    }
 }

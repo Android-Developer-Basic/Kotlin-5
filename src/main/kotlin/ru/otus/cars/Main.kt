@@ -5,7 +5,6 @@ import ru.otus.cars.tank.LpgMouth
 import ru.otus.cars.tank.PetrolLiters
 import ru.otus.cars.tank.PetrolMouth
 import ru.otus.cars.tank.Tank
-import ru.otus.cars.tank.TankMouth
 
 fun main() {
     println("\n===> drive cars...")
@@ -115,23 +114,17 @@ fun getCarsFilled() {
     val cars = listOf(
         Vaz2107.build(Car.Plates("123", 77), getLpgTank()),
         Vaz2108.build(Car.Plates("321", 78), getPetrolTank()),
-        Taz
+        Taz,
+        Vaz2108.build(Car.Plates("777", 177), getLpgTank()),
     )
 
-    val fillTank: (TankMouth, Int) -> Unit =
-        { mouth: TankMouth, liters: Int ->
-            when (mouth) {
-                is LpgMouth ->  mouth.fillWithLpg(LpgLiters(liters))
-                is PetrolMouth -> mouth.fillWithPetrol(PetrolLiters(liters))
-            }
-        }
+    val gasStation = GasStationImpl()
 
     println("Заправляем тачки:")
+
     cars.forEach { car ->
-        when (car) {
-            is Vaz2107 -> fillTank(car.tankMouth, 15)
-            is Vaz2108 -> fillTank(car.tankMouth,25)
-            Taz -> Taz.tankMouth.open()
-        }
+        println(car)
+        gasStation.fillCar(car, 20)
+        println(car)
     }
 }
