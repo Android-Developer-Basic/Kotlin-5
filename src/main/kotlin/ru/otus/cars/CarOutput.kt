@@ -8,4 +8,5 @@ interface CarOutput {
      * Скажи текущую скорость
      */
     fun getCurrentSpeed(): Int
+    fun getCurrentWheelAngle(): Int
 }

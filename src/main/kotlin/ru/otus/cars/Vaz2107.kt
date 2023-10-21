@@ -68,5 +68,9 @@ class Vaz2107 private constructor() : Car {
         override fun getCurrentSpeed(): Int {
             return this@Vaz2107.currentSpeed
         }
+
+        override fun getCurrentWheelAngle(): Int {
+            return this@Vaz2107.wheelAngle
+        }
     }
 }
