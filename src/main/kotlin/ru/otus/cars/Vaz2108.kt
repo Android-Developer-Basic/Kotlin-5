@@ -52,6 +52,9 @@ class Vaz2108 private constructor() : Car {
         return "Vaz2108(plates=$plates, wheelAngle=$wheelAngle, currentSpeed=$currentSpeed)"
     }
 
+    override val tankMouth: TankMouth
+        get() = TODO("Not yet implemented")
+
     /**
      * Делегируем приборы внутреннему классу
      */
@@ -67,6 +70,10 @@ class Vaz2108 private constructor() : Car {
     inner class VazOutput : CarOutput {
         override fun getCurrentSpeed(): Int {
             return this@Vaz2108.currentSpeed
+        }
+
+        override fun getFuelContents(): Int {
+            TODO("Not yet implemented")
         }
     }
 }
