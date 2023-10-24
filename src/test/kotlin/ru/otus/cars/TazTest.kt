@@ -37,4 +37,12 @@ class TazTest {
             taz.wheelToLeft(-1)
         }
     }
+
+    @Test
+    fun mouth() {
+        val taz = Togliatti.buildTaz()
+        assertThrows<IllegalStateException>(message = "Бак взорвался") {
+            taz.mouth
+        }
+    }
 }

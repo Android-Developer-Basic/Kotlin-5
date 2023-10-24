@@ -9,4 +9,5 @@ interface CarOutput {
      */
     fun getCurrentSpeed(): Int
     fun getCurrentWheelAngle(): Int
+    fun getFuelContents(): Int
 }
