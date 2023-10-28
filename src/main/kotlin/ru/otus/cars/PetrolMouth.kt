@@ -1,15 +1,16 @@
 package ru.otus.cars
 
-class PetrolMouth : TankMouth() {
+class PetrolMouth() : TankMouth() {
     override fun open() {
-        TODO("Not yet implemented")
+        println("Открыли бак")
     }
 
     override fun close() {
-        TODO("Not yet implemented")
+        println("Закрыли бак")
     }
 
-    fun fuelPetrol(litres: Int) {
-        TODO("!!!")
+    fun fuelPetrol(litres: Int, updateFuel: UpdateFuel) {
+        updateFuel(litres)
+        println("Выдано $litres литров")
     }
 }

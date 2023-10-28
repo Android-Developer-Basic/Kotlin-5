@@ -23,6 +23,5 @@ sealed interface Car : CarInput {
      * Топливный бак
      */
     val tankMouth : TankMouth // горловина
-    private data class TankFuel(val tankMouth: TankMouth, var tankLitres: Int)
-
+    val updateFuel: UpdateFuel // вспомогательный объект для обновления информации о топливе в баке
 }

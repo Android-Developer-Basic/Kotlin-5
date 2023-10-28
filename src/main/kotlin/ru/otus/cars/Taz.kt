@@ -30,6 +30,11 @@ object Taz : Car {
         throw IllegalStateException("Руля нет")
     }
 
-    override val tankMouth: TankMouth
-        get() = TODO("Not yet implemented")
+    /**
+     * Горловина бака
+     */
+    override var tankMouth = LpgMouth()
+
+    override val updateFuel =
+        UpdateFuel { throw IllegalStateException("ВЗРЫВ! Проблемы в топливной системе.") }
 }
