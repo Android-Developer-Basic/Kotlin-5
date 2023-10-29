@@ -1,8 +1,9 @@
 package ru.otus.cars
 
 sealed class TankMouth {
-    open fun open() {}
-    open fun close() {}
+    abstract fun open()
+    abstract fun close()
+
 }
 
 open class PetrolMouth : TankMouth() {
