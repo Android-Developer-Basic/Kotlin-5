@@ -11,6 +11,8 @@ fun main() {
     modelSpecial()
     println("\n===> get equipment...")
     getEquipment()
+    println("\n===> get color...")
+    getColor()
 }
 
 fun driveCars() {
@@ -69,5 +71,16 @@ fun getEquipment() {
 
     cars.forEach { car ->
         println("Оборудование: ${car.getEquipment()}")
+    }
+}
+
+fun getColor() {
+    val cars = listOf(
+        Vaz2107.build(Car.Plates("123", 77)),
+        Vaz2108.build(Car.Plates("321", 78))
+    )
+
+    cars.forEach { car ->
+        println("Цвет: ${car.color}")
     }
 }

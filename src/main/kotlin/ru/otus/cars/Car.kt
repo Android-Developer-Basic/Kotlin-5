@@ -10,6 +10,11 @@ sealed interface Car : CarInput {
     val plates: Plates
 
     /**
+     * Цвет машины
+     */
+    val color: String
+
+    /**
      * Следит за машиной
      */
     val carOutput: CarOutput
