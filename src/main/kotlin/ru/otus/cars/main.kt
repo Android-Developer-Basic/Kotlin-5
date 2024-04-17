@@ -9,6 +9,8 @@ fun main() {
     garageMake()
     println("\n===> model special...")
     modelSpecial()
+    println("\n===> get equipment...")
+    getEquipment()
 }
 
 fun driveCars() {
@@ -56,5 +58,16 @@ fun modelSpecial() {
             is Vaz2107 -> car.drdrdrdrdr()
             is Vaz2108 -> car.zhzhzhzh()
         }
+    }
+}
+
+fun getEquipment() {
+    val cars = listOf(
+        Vaz2107.build(Car.Plates("123", 77)),
+        Vaz2108.build(Car.Plates("321", 78))
+    )
+
+    cars.forEach { car ->
+        println("Оборудование: ${car.getEquipment()}")
     }
 }
