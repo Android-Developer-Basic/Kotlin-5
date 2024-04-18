@@ -8,13 +8,12 @@ fun main() {
     println("\n===> garage make...")
     garageMake()
     println("\n===> model special...")
-    modelSpecial()
     println("\n===> get equipment...")
     getEquipment()
     println("\n===> get color...")
     getColor()
-    println("\n===> model make...")
-    modelMake()
+    println("\n===> tech checks...")
+    techChecks()
 }
 
 fun driveCars() {
@@ -51,22 +50,6 @@ fun garageMake() {
     println(vaz.toString())
 }
 
-fun modelSpecial() {
-    val cars = listOf(
-        Vaz2107.build(Car.Plates("123", 77)),
-        Vaz2108.build(Car.Plates("321", 78)),
-        Taz
-    )
-
-    cars.forEach { car ->
-        when(car) {
-            is Vaz2107 -> car.drdrdrdrdr()
-            is Vaz2108 -> car.zhzhzhzh()
-            Taz -> println("Таз больше не ездит!")
-        }
-    }
-}
-
 fun getEquipment() {
     val cars = listOf(
         Vaz2107.build(Car.Plates("123", 77)),
@@ -89,11 +72,20 @@ fun getColor() {
     }
 }
 
-fun modelMake() {
-    val vaz1 = Togliatti.buildCar(Vaz2107, Car.Plates("123", 77))
-    val vaz2 = Togliatti.buildCar(Vaz2108, Car.Plates("321", 78))
+fun techChecks() {
+    val vaz1 = Vaz2107.build(Car.Plates("123", 77))
+    val vaz2 = Vaz2108.build(Car.Plates("321", 78))
 
-    println("Создали машины:")
-    println(vaz1.toString()) // 2107
-    println(vaz2.toString()) // 2108
+    repairEngine(vaz1)
+    repairEngine(vaz2)
+}
+
+fun repairEngine(car: VazPlatform) {
+    // Проверяем тип двигателя
+    // В зависимости от типа двигателя выполняем разные действия
+    // when обеспечивает обход всех вариантов перечисления
+    when (car.engine) {
+        is VazEngine.LADA_2107 -> println("Чистка карбюратора у двигателя объемом ${car.engine.volume} куб.см у машины $car")
+        is VazEngine.SAMARA_2108 -> println("Угол зажигания у двигателя объемом ${car.engine.volume} куб.см у машины $car")
+    }
 }

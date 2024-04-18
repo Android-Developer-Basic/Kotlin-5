@@ -11,4 +11,16 @@ abstract class VazPlatform(override val color: String) : Car {
 
     // Получить оборудование
     override fun getEquipment(): String = "Кузов, колеса, движок"
+
+    // Абстрактное свойство двигателя
+    abstract val engine: VazEngine
+}
+
+// Перечисление двигателей ВАЗ
+sealed class VazEngine {
+    // Объем двигателя можно задать при производстве
+    abstract val volume: Int
+
+    data class LADA_2107(override val volume: Int) : VazEngine()
+    data class SAMARA_2108(override val volume: Int) : VazEngine()
 }
