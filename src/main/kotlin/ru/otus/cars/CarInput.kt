@@ -13,4 +13,7 @@ interface CarInput {
      * Руль влево на [degrees] градусов
      */
     fun wheelToLeft(degrees: Int)
+    fun getContents() : Int
+    fun receiveFuel(litres: Int)
+
 }

@@ -1,5 +1,9 @@
 package ru.otus.cars
 
+import ru.otus.cars.Mouth.LpgMouth
+import ru.otus.cars.Mouth.PetrolMouth
+import ru.otus.cars.Mouth.TankMouth
+
 fun main() {
     println("\n===> drive cars...")
     driveCars()
@@ -19,8 +23,8 @@ fun main() {
 }
 
 fun driveCars() {
-    val vaz1 = Togliatti.buildCar(Vaz2107, Car.Plates("123", 77))
-    val vaz2 = Togliatti.buildCar(Vaz2108, Car.Plates("321", 78))
+    val vaz1 = Togliatti.buildCar(Vaz2107, Car.Plates("123", 77), LpgMouth())
+    val vaz2 = Togliatti.buildCar(Vaz2108, Car.Plates("321", 78), PetrolMouth())
 
     println("Экземпляры класса имеют разное внутреннее состояние:")
     vaz1.wheelToRight(10)
@@ -30,7 +34,7 @@ fun driveCars() {
 }
 
 fun innerNestedCheck() {
-    val vaz = Vaz2107.build(Car.Plates("123", 77))
+    val vaz = Vaz2107.build(Car.Plates("123", 77), LpgMouth())
     val output = vaz.VazOutput() // Создаем новый объект ИЗ ЭКЗЕМПЛЯРА МАШИНЫ
 
     println("Скорость до проверки: ${output.getCurrentSpeed()}") // Выводит 0
@@ -41,21 +45,21 @@ fun innerNestedCheck() {
 fun garageMake() {
     val maker = "Дядя Вася"
     val garage = object : CarFactory {
-        override fun buildCar(builder: CarBuilder, plates: Car.Plates): Car {
+        override fun buildCar(builder: CarBuilder, plates: Car.Plates, tankMouth: TankMouth): Car {
             println("Запил Жигулей у: $maker...")
             println("Машину не проверяем... и в продакшн...")
-            return builder.build(plates)
+            return builder.build(plates, tankMouth)
         }
     }
 
-    val vaz = garage.buildCar(Vaz2107, Car.Plates("500", 50))
+    val vaz = garage.buildCar(Vaz2107, Car.Plates("500", 50), LpgMouth())
     println(vaz.toString())
 }
 
 fun getEquipment() {
     val cars = listOf(
-        Vaz2107.build(Car.Plates("123", 77)),
-        Vaz2108.build(Car.Plates("321", 78))
+        Vaz2107.build(Car.Plates("123", 77), LpgMouth()),
+        Vaz2108.build(Car.Plates("321", 78), PetrolMouth())
     )
 
     cars.forEach { car ->
@@ -65,8 +69,8 @@ fun getEquipment() {
 
 fun getColor() {
     val cars = listOf(
-        Vaz2107.build(Car.Plates("123", 77)),
-        Vaz2108.build(Car.Plates("321", 78))
+        Vaz2107.build(Car.Plates("123", 77), LpgMouth()),
+        Vaz2108.build(Car.Plates("321", 78), PetrolMouth())
     )
 
     cars.forEach { car ->
@@ -75,8 +79,8 @@ fun getColor() {
 }
 
 fun techChecks() {
-    val vaz1 = Vaz2107.build(Car.Plates("123", 77))
-    val vaz2 = Vaz2108.build(Car.Plates("321", 78))
+    val vaz1 = Vaz2107.build(Car.Plates("123", 77), LpgMouth())
+    val vaz2 = Vaz2108.build(Car.Plates("321", 78), PetrolMouth())
 
     repairEngine(vaz1)
     repairEngine(vaz2)
