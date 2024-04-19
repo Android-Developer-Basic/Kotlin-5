@@ -1,5 +1,7 @@
 package ru.otus.cars
 
+import ru.otus.cars.Mouth.LpgMouth
+import ru.otus.cars.Mouth.TankMouth
 import kotlin.random.Random
 
 /**
@@ -18,9 +20,10 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
             }
         }
 
-        override fun build(plates: Car.Plates): Vaz2108 = Vaz2108("Красный").apply {
+        override fun build(plates: Car.Plates, tankMouth: TankMouth): Vaz2108 = Vaz2108("Красный").apply {
             this.engine = getRandomEngine()
             this.plates = plates
+            this.tankMouth = tankMouth
         }
 
         fun alignWheels(vaz2108: Vaz2108) {
@@ -53,12 +56,13 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
     }
 
     private var currentSpeed: Int = 0 // Скока жмёт
-
+    private var fuel: Int = 0
     /**
      * Доступно сборщику
      * @see [build]
      */
     override lateinit var plates: Car.Plates
+    lateinit var mouth: TankMouth
         private set
 
     // Выводим состояние машины
@@ -70,6 +74,14 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
      * Делегируем приборы внутреннему классу
      */
     override val carOutput: CarOutput = VazOutput()
+    override lateinit var tankMouth: TankMouth
+    override fun getContents(): Int {
+        return fuel
+    }
+
+    override fun receiveFuel(litres: Int) {
+        fuel += litres
+    }
 
     /**
      * Имеет доступ к внутренним данным ЭТОГО ВАЗ-2108!
@@ -77,6 +89,10 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
     inner class VazOutput : CarOutput {
         override fun getCurrentSpeed(): Int {
             return this@Vaz2108.currentSpeed
+        }
+
+        override fun getFuelContents(): Int {
+            return this@Vaz2108.fuel
         }
     }
 }
