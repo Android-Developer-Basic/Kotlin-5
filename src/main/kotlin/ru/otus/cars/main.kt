@@ -30,8 +30,9 @@ fun driveCars() {
 }
 
 fun innerNestedCheck() {
-    val vaz = Vaz2107.build(Car.Plates("123", 77))
+    val vaz = Vaz2107.build(Car.Plates("123", 77), LpgMouth())
     val output = vaz.VazOutput() // Создаем новый объект ИЗ ЭКЗЕМПЛЯРА МАШИНЫ
+
 
     println("Скорость до проверки: ${output.getCurrentSpeed()}") // Выводит 0
     Vaz2107.test(vaz) // Газуем...
@@ -44,7 +45,7 @@ fun garageMake() {
         override fun buildCar(builder: CarBuilder, plates: Car.Plates): Car {
             println("Запил Жигулей у: $maker...")
             println("Машину не проверяем... и в продакшн...")
-            return builder.build(plates)
+            return builder.build(plates, LpgMouth())
         }
     }
 
@@ -54,8 +55,8 @@ fun garageMake() {
 
 fun getEquipment() {
     val cars = listOf(
-        Vaz2107.build(Car.Plates("123", 77)),
-        Vaz2108.build(Car.Plates("321", 78))
+        Vaz2107.build(Car.Plates("123", 77), LpgMouth()),
+        Vaz2108.build(Car.Plates("321", 78), PetrolMouth())
     )
 
     cars.forEach { car ->
@@ -65,8 +66,8 @@ fun getEquipment() {
 
 fun getColor() {
     val cars = listOf(
-        Vaz2107.build(Car.Plates("123", 77)),
-        Vaz2108.build(Car.Plates("321", 78))
+        Vaz2107.build(Car.Plates("123", 77), LpgMouth()),
+        Vaz2108.build(Car.Plates("321", 78), PetrolMouth())
     )
 
     cars.forEach { car ->
@@ -75,8 +76,8 @@ fun getColor() {
 }
 
 fun techChecks() {
-    val vaz1 = Vaz2107.build(Car.Plates("123", 77))
-    val vaz2 = Vaz2108.build(Car.Plates("321", 78))
+    val vaz1 = Vaz2107.build(Car.Plates("123", 77), LpgMouth())
+    val vaz2 = Vaz2108.build(Car.Plates("321", 78), PetrolMouth())
 
     repairEngine(vaz1)
     repairEngine(vaz2)
