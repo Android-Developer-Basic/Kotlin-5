@@ -50,11 +50,15 @@ class Vaz2107 private constructor(color: String) : VazPlatform(color) {
 
     private var currentSpeed: Int = 0 // Скока жмёт
 
+    private var fuelContents: Int = 0 // Скока заправлено литров
+
     /**
      * Доступно сборщику
      * @see [build]
      */
     override lateinit var plates: Car.Plates
+        private set
+    override lateinit var tankMouth: LpgMouth
         private set
 
     // Выводим состояние машины
@@ -73,6 +77,10 @@ class Vaz2107 private constructor(color: String) : VazPlatform(color) {
     inner class VazOutput : CarOutput {
         override fun getCurrentSpeed(): Int {
             return this@Vaz2107.currentSpeed
+        }
+
+        override fun getFuelContents(): Int {
+            return this@Vaz2107.fuelContents
         }
     }
 }
