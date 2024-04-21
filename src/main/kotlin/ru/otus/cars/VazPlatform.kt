@@ -1,6 +1,8 @@
 package ru.otus.cars
 
 abstract class VazPlatform(override val color: String) : Car {
+    lateinit var mouth: TankMouth
+
     // Положение руля. Доступно только внутри класса и наследникам
     protected var wheelAngle: Int = 0 // Положение руля
 

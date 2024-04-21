@@ -6,6 +6,8 @@ object Taz: Car {
      */
     override val plates: Car.Plates
         get() = throw NotImplementedError("Номера сняты")
+    override val tankMouth: TankMouth
+        get() = TODO("Not yet implemented")
 
     /**
      * Цвет машины
