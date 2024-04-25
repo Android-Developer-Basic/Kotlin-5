@@ -7,6 +7,8 @@ object Taz: Car {
     override val plates: Car.Plates
         get() = throw NotImplementedError("Номера сняты")
 
+    override var mouth: TankMouth = LpgMouth()
+
     /**
      * Цвет машины
      */
@@ -35,5 +37,9 @@ object Taz: Car {
      */
     override fun wheelToLeft(degrees: Int) {
         throw NotImplementedError("Руля нет")
+    }
+
+    override fun toString(): String {
+        return "Vaz2107(fuelContents=${mouth.fuelContents}, mouth=$mouth)"
     }
 }

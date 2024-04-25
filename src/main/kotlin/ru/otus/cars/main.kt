@@ -1,21 +1,51 @@
 package ru.otus.cars
 
 fun main() {
-    println("\n===> drive cars...")
-    driveCars()
-    println("\n===> inner test...")
-    innerNestedCheck()
-    println("\n===> garage make...")
-    garageMake()
-    println("\n===> model special...")
-    println("\n===> get equipment...")
-    getEquipment()
-    println("\n===> get color...")
-    getColor()
-    println("\n===> tech checks...")
-    techChecks()
-    println("\n===> Taz...")
-    println(Taz.color)
+//    println("\n===> drive cars...")
+//    driveCars()
+//    println("\n===> inner test...")
+//    innerNestedCheck()
+//    println("\n===> garage make...")
+//    garageMake()
+//    println("\n===> model special...")
+//    println("\n===> get equipment...")
+//    getEquipment()
+//    println("\n===> get color...")
+//    getColor()
+//    println("\n===> tech checks...")
+//    techChecks()
+//    println("\n===> Taz...")
+//    println(Taz.color)
+
+//    val myCar = Togliatti.buildCar(Vaz2107, Car.Plates("абв", 123 ))
+//    println(myCar.mouth.carlink)
+//
+//    FuelStation.refuelingTheCar(myTaz, 10)
+    val taz = Taz
+
+    val vaz1 = Togliatti.buildCar(Vaz2107, Car.Plates("123", 77))
+    val vaz2 = Togliatti.buildCar(Vaz2108, Car.Plates("321", 78))
+
+    val cars : List<Car> = listOf(vaz1, vaz2, taz)
+
+    for (car in cars) {
+        println(car)
+    }
+    for (car in cars) {
+        FuelStation.refuelingTheCar(car, 10)
+    }
+    try {
+        for (car in cars) {
+            println(car.carOutput.getFuelContents())
+        }
+    }
+    catch (e: NotImplementedError) {
+        println("У таза нет приборов")
+    }
+
+
+
+
 }
 
 fun driveCars() {
@@ -30,8 +60,9 @@ fun driveCars() {
 }
 
 fun innerNestedCheck() {
-    val vaz = Vaz2107.build(Car.Plates("123", 77))
+    val vaz = Vaz2107.build(Car.Plates("123", 77), LpgMouth())
     val output = vaz.VazOutput() // Создаем новый объект ИЗ ЭКЗЕМПЛЯРА МАШИНЫ
+
 
     println("Скорость до проверки: ${output.getCurrentSpeed()}") // Выводит 0
     Vaz2107.test(vaz) // Газуем...
@@ -44,7 +75,7 @@ fun garageMake() {
         override fun buildCar(builder: CarBuilder, plates: Car.Plates): Car {
             println("Запил Жигулей у: $maker...")
             println("Машину не проверяем... и в продакшн...")
-            return builder.build(plates)
+            return builder.build(plates, LpgMouth())
         }
     }
 
@@ -54,8 +85,8 @@ fun garageMake() {
 
 fun getEquipment() {
     val cars = listOf(
-        Vaz2107.build(Car.Plates("123", 77)),
-        Vaz2108.build(Car.Plates("321", 78))
+        Vaz2107.build(Car.Plates("123", 77), LpgMouth()),
+        Vaz2108.build(Car.Plates("321", 78), PetrolMouth())
     )
 
     cars.forEach { car ->
@@ -65,8 +96,8 @@ fun getEquipment() {
 
 fun getColor() {
     val cars = listOf(
-        Vaz2107.build(Car.Plates("123", 77)),
-        Vaz2108.build(Car.Plates("321", 78))
+        Vaz2107.build(Car.Plates("123", 77), LpgMouth()),
+        Vaz2108.build(Car.Plates("321", 78), PetrolMouth())
     )
 
     cars.forEach { car ->
@@ -75,8 +106,8 @@ fun getColor() {
 }
 
 fun techChecks() {
-    val vaz1 = Vaz2107.build(Car.Plates("123", 77))
-    val vaz2 = Vaz2108.build(Car.Plates("321", 78))
+    val vaz1 = Vaz2107.build(Car.Plates("123", 77), LpgMouth())
+    val vaz2 = Vaz2108.build(Car.Plates("321", 78), PetrolMouth())
 
     repairEngine(vaz1)
     repairEngine(vaz2)
