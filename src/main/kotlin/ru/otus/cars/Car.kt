@@ -9,7 +9,7 @@ interface Car : CarInput {
      */
     val plates: Plates
 
-    val tankMouth: TankMouth
+    val mouth: TankMouth
 
     /**
      * Цвет машины

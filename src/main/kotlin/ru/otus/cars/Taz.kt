@@ -6,8 +6,13 @@ object Taz: Car {
      */
     override val plates: Car.Plates
         get() = throw NotImplementedError("Номера сняты")
-    override lateinit var tankMouth: TankMouth
-        private set
+
+    override var mouth: TankMouth
+        get() = LpgMouth()
+        set(value) {
+            mouth.setCarLink((this))
+            LpgMouth()
+        }
 
     /**
      * Цвет машины
@@ -37,5 +42,9 @@ object Taz: Car {
      */
     override fun wheelToLeft(degrees: Int) {
         throw NotImplementedError("Руля нет")
+    }
+
+    override fun toString(): String {
+        return "Таз"
     }
 }

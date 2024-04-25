@@ -59,8 +59,8 @@ class Vaz2107 private constructor(color: String) : VazPlatform(color) {
      */
     override lateinit var plates: Car.Plates
         private set
-    override lateinit var tankMouth: LpgMouth
-        private set
+    override lateinit var mouth: TankMouth
+        set
 
     // Выводим состояние машины
     override fun toString(): String {
