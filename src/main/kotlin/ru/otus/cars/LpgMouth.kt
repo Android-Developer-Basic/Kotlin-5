@@ -17,6 +17,10 @@ class LpgMouth(startFuel: Int = 0, car: Car? = null) : TankMouth(startFuel) {
                     "но что-то пошло не так, машина начала дымиться...ВЗРЫВ, БАБАХ!")
     }
 
+    override fun toString(): String {
+        return "Газовая система"
+    }
+
 
 
 }

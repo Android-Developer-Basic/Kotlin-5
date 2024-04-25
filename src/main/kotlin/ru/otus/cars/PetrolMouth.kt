@@ -14,6 +14,9 @@ class PetrolMouth(startFuel: Int = 0, car: Car? = null) : TankMouth(startFuel) {
             throw CantFillTankOfTazException("Ты пытался заправить Taz " +
                     "но что-то пошло не так, машина начала дымиться...ВЗРЫВ, БАБАХ!")
     }
+    override fun toString(): String {
+        return "Бензиновая система"
+    }
 
 
 }

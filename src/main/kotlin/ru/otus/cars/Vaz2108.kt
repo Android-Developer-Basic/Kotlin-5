@@ -64,12 +64,13 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
     override lateinit var plates: Car.Plates
         private set
 
-    lateinit var tankMouth: PetrolMouth
-        private set
+    override lateinit var mouth: TankMouth
+        set
 
     // Выводим состояние машины
     override fun toString(): String {
-        return "Vaz2108(plates=$plates, wheelAngle=$wheelAngle, currentSpeed=$currentSpeed)"
+        return "Vaz2108(plates=$plates, wheelAngle=$wheelAngle, " +
+                "currentSpeed=$currentSpeed fuelContents=$fuelContents, mouth=$mouth)"
     }
 
     /**
@@ -85,7 +86,7 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
             return this@Vaz2108.currentSpeed
         }
         override fun getFuelContents(): Int {
-            return this@Vaz2108.fuelContents
+            return this@Vaz2108.mouth.fuelContents
         }
     }
 }

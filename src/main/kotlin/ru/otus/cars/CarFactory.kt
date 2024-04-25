@@ -27,7 +27,7 @@ object Togliatti : CarFactory {
     private fun buildVaz2108(plates: Car.Plates): Car {
         println("Запил ${Vaz2108.MODEL} в Тольятти...")
         val vaz = Vaz2108.build(plates, PetrolMouth())
-        vaz.tankMouth.setCarLink(vaz)
+        vaz.mouth.setCarLink(vaz)
         println("Сход-развал...")
         Vaz2108.alignWheels(vaz)
         vaz.zhzhzhzh()

@@ -7,12 +7,7 @@ object Taz: Car {
     override val plates: Car.Plates
         get() = throw NotImplementedError("Номера сняты")
 
-    override var mouth: TankMouth
-        get() = LpgMouth()
-        set(value) {
-            mouth.setCarLink((this))
-            LpgMouth()
-        }
+    override var mouth: TankMouth = LpgMouth()
 
     /**
      * Цвет машины
@@ -45,6 +40,6 @@ object Taz: Car {
     }
 
     override fun toString(): String {
-        return "Таз"
+        return "Vaz2107(fuelContents=${mouth.fuelContents}, mouth=$mouth)"
     }
 }

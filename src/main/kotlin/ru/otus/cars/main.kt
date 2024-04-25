@@ -19,8 +19,31 @@ fun main() {
 
 //    val myCar = Togliatti.buildCar(Vaz2107, Car.Plates("абв", 123 ))
 //    println(myCar.mouth.carlink)
-    val myTaz = Taz
-    FuelStation.refuelingTheCar(myTaz, 10)
+//
+//    FuelStation.refuelingTheCar(myTaz, 10)
+    val taz = Taz
+
+    val vaz1 = Togliatti.buildCar(Vaz2107, Car.Plates("123", 77))
+    val vaz2 = Togliatti.buildCar(Vaz2108, Car.Plates("321", 78))
+
+    val cars : List<Car> = listOf(vaz1, vaz2, taz)
+
+    for (car in cars) {
+        println(car)
+    }
+    for (car in cars) {
+        FuelStation.refuelingTheCar(car, 10)
+    }
+    try {
+        for (car in cars) {
+            println(car.carOutput.getFuelContents())
+        }
+    }
+    catch (e: NotImplementedError) {
+        println("У таза нет приборов")
+    }
+
+
 
 
 }
