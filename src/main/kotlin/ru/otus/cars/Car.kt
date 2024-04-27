@@ -20,6 +20,13 @@ sealed interface Car : CarInput {
     val carOutput: CarOutput
 
     /**
+     * горловина
+     */
+    val tankMouth:TankMouth
+
+    val tank:Tank;
+
+    /**
      * Получить оборудование
      */
     fun getEquipment(): String

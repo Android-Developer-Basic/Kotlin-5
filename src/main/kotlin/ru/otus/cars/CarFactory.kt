@@ -44,7 +44,7 @@ object Togliatti : CarFactory {
         println("Запил ${Vaz2108.MODEL} в Тольятти...")
         val vaz = Vaz2108.build(plates)
         println("Сход-развал...")
-        Vaz2108.alignWheels(vaz)
+//        Vaz2108.alignWheels(vaz)
         println(vaz)
         return vaz
     }

@@ -15,6 +15,8 @@ object Taz : VazPlatform("Ржавчина") {
      */
     override val carOutput: CarOutput
         get() = throw IllegalStateException("Приборы сняты")
+    override val tank :Tank
+        get() = throw IllegalStateException("BOOOOOM!!!")
 
     /**
      * Руль вправо на [degrees] градусов
@@ -29,4 +31,7 @@ object Taz : VazPlatform("Ржавчина") {
     override fun wheelToLeft(degrees: Int) {
         throw IllegalStateException("Руля нет")
     }
+
+    override val engine: VazEngine
+        get() = throw IllegalStateException("все лошади в Румынии")
 }
