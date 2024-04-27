@@ -5,7 +5,7 @@ import kotlin.random.Random
 /**
  * Восьмерка
  */
-class Vaz2108 private constructor(color: String) : VazPlatform(color) {
+class Vaz2108 private constructor(color: String,) : VazPlatform(color) {
     /**
      * Сам-себе-сборщик ВАЗ 2108.
      */
@@ -21,6 +21,7 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
         override fun build(plates: Car.Plates): Vaz2108 = Vaz2108("Красный").apply {
             this.engine = getRandomEngine()
             this.plates = plates
+            this.tank = Tank.build(LpgMouth())
         }
 
         fun alignWheels(vaz2108: Vaz2108) {
@@ -37,6 +38,10 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
     // Переопределяем свойство родителя
     override lateinit var engine: VazEngine
         private set
+
+    override lateinit var tank: Tank
+        private set
+
 
     /**
      * Восьмерка едет так
@@ -71,12 +76,17 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
      */
     override val carOutput: CarOutput = VazOutput()
 
+
     /**
      * Имеет доступ к внутренним данным ЭТОГО ВАЗ-2108!
      */
     inner class VazOutput : CarOutput {
         override fun getCurrentSpeed(): Int {
             return this@Vaz2108.currentSpeed
+        }
+
+        override fun getFuelContents(): Int {
+            return this@Vaz2108.tank.getContents()
         }
     }
 }
