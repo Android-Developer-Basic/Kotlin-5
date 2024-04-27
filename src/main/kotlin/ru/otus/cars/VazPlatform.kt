@@ -12,8 +12,6 @@ abstract class VazPlatform(override val color: String) : Car {
     // Получить оборудование
     override fun getEquipment(): String = "Кузов, колеса, движок"
 
-    // Абстрактное свойство двигателя
-    abstract val engine: VazEngine
 
     override val tankMouth: TankMouth
         get() = tank.mouth

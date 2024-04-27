@@ -22,14 +22,17 @@ sealed interface Car : CarInput {
     /**
      * горловина
      */
-    val tankMouth:TankMouth
+    val tankMouth: TankMouth
 
-    val tank:Tank;
+    val tank: Tank
 
     /**
      * Получить оборудование
      */
     fun getEquipment(): String
+
+    // свойство двигателя
+    val engine: VazEngine
 
     /**
      * Внутренний статический класс - номерой знак

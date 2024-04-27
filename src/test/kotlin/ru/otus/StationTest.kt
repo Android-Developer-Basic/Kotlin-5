@@ -1,11 +1,9 @@
 package ru.otus
 
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Assertions.*
-
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 import ru.otus.cars.Car
-import ru.otus.cars.CarFactory
 import ru.otus.cars.Togliatti
 import ru.otus.cars.Vaz2107
 import ru.otus.cars.Vaz2108
@@ -31,7 +29,7 @@ class StationTest {
     @Test
     fun refillCarTaz() {
         val car = ru.otus.cars.Taz
-        assertThrows(IllegalStateException::class.java, {
+        assertThrows(NotImplementedError::class.java, {
             Station.build()
                 .refillCar(car)
         }, "BOOOOOM!!!")

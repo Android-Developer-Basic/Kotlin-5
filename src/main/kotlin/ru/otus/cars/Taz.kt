@@ -17,13 +17,15 @@ object Taz: Car {
      */
     override val carOutput: CarOutput
         get() = throw NotImplementedError("Приборов нет")
+    override val tankMouth: TankMouth
+        get() = throw NotImplementedError("BOOOOOM!!!")
 
     /**
      * Получить оборудование
      */
     override fun getEquipment(): String = "Крыса"
 
-    override val tank :Tank
+    override val tank: Tank
         get() = throw NotImplementedError("BOOOOOM!!!")
 
     /**
