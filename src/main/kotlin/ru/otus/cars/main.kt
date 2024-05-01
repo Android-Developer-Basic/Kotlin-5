@@ -1,5 +1,7 @@
 package ru.otus.cars
 
+import ru.otus.cars.fuel.FillingStation
+
 fun main() {
     println("\n===> drive cars...")
     driveCars()
@@ -9,13 +11,15 @@ fun main() {
     garageMake()
     println("\n===> model special...")
     println("\n===> get equipment...")
-    getEquipment()
+    printEquipment()
     println("\n===> get color...")
-    getColor()
+    printColor()
     println("\n===> tech checks...")
     techChecks()
     println("\n===> Taz...")
     println(Taz.color)
+    println("\n===> Visit filling station...")
+    visitFillingStation()
 }
 
 fun driveCars() {
@@ -52,31 +56,16 @@ fun garageMake() {
     println(vaz.toString())
 }
 
-fun getEquipment() {
-    val cars = listOf(
-        Vaz2107.build(Car.Plates("123", 77)),
-        Vaz2108.build(Car.Plates("321", 78))
-    )
-
-    cars.forEach { car ->
-        println("Оборудование: ${car.getEquipment()}")
-    }
+fun printEquipment() = buildTwoCars().forEach { car ->
+    println("Оборудование: ${car.getEquipment()}")
 }
 
-fun getColor() {
-    val cars = listOf(
-        Vaz2107.build(Car.Plates("123", 77)),
-        Vaz2108.build(Car.Plates("321", 78))
-    )
-
-    cars.forEach { car ->
-        println("Цвет: ${car.color}")
-    }
+fun printColor() = buildTwoCars().forEach { car ->
+    println("Цвет: ${car.color}")
 }
 
 fun techChecks() {
-    val vaz1 = Vaz2107.build(Car.Plates("123", 77))
-    val vaz2 = Vaz2108.build(Car.Plates("321", 78))
+    val (vaz1, vaz2) = buildTwoCars()
 
     repairEngine(vaz1)
     repairEngine(vaz2)
@@ -89,5 +78,21 @@ fun repairEngine(car: VazPlatform) {
     when (car.engine) {
         is VazEngine.LADA_2107 -> println("Чистка карбюратора у двигателя объемом ${car.engine.volume} куб.см у машины $car")
         is VazEngine.SAMARA_2108 -> println("Угол зажигания у двигателя объемом ${car.engine.volume} куб.см у машины $car")
+        else -> println("Этому двигателю ничего не поможет")
     }
+}
+
+fun buildTwoCars(): List<VazPlatform> = listOf(
+    Vaz2107.build(Car.Plates("123", 77)),
+    Vaz2108.build(Car.Plates("321", 78))
+)
+
+fun visitFillingStation() {
+    val (vaz1, vaz2) = buildTwoCars()
+
+    val fillingStation = FillingStation()
+    fillingStation.safeFillCar(vaz1, 25)
+    fillingStation.safeFillCar(vaz1, 25)
+    fillingStation.safeFillCar(vaz2, 33)
+    fillingStation.safeFillCar(Taz, 10)
 }
