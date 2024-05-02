@@ -1,5 +1,7 @@
 package ru.otus.cars
 
+import java.lang.Exception
+
 fun main() {
     println("\n===> drive cars...")
     driveCars()
@@ -16,8 +18,11 @@ fun main() {
     techChecks()
     println("\n===> Taz...")
     println(Taz.color)
+    println("\n===> refuel")
+    refueling()
+    println("\n===> refuelTaz")
+    refuelingTaz()
 }
-
 fun driveCars() {
     val vaz1 = Togliatti.buildCar(Vaz2107, Car.Plates("123", 77))
     val vaz2 = Togliatti.buildCar(Vaz2108, Car.Plates("321", 78))
@@ -89,5 +94,29 @@ fun repairEngine(car: VazPlatform) {
     when (car.engine) {
         is VazEngine.LADA_2107 -> println("Чистка карбюратора у двигателя объемом ${car.engine.volume} куб.см у машины $car")
         is VazEngine.SAMARA_2108 -> println("Угол зажигания у двигателя объемом ${car.engine.volume} куб.см у машины $car")
+    }
+}
+
+// Заправка
+fun refueling () {
+    val cars = listOf(
+        Vaz2107.build(Car.Plates("123", 77)),
+        Vaz2108.build(Car.Plates("321", 78))
+    )
+
+    cars.forEach { car ->
+        println("Уровень топлива до заправки: ${car.carOutput.getFuelContents()} у машины $car")
+        GasStation.refuel(car)
+        println("Уровень топлива после заправки: ${car.carOutput.getFuelContents()} у машины $car")
+    }
+}
+
+// Заправка Таза
+fun refuelingTaz () {
+    try {
+        println("Заправляем Таз")
+        GasStation.refuel(Taz)
+    } catch (e: Exception) {
+        println(e.message)
     }
 }

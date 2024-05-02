@@ -14,6 +14,9 @@ abstract class VazPlatform(override val color: String) : Car {
 
     // Абстрактное свойство двигателя
     abstract val engine: VazEngine
+
+    // Создание бака
+    protected val tank = VazTank()
 }
 
 // Перечисление двигателей ВАЗ
@@ -24,3 +27,16 @@ sealed class VazEngine {
     data class LADA_2107(override val volume: Int) : VazEngine()
     data class SAMARA_2108(override val volume: Int) : VazEngine()
 }
+// Реализация бака
+class VazTank: Tank {
+    private var fuelLevel = 0
+    override lateinit var mouth: Car.TankMouth
+    override fun getContents(): Int {
+        return fuelLevel
+    }
+
+    override fun receiveFuel(liters: Int) {
+        fuelLevel += liters
+    }
+}
+

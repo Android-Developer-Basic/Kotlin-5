@@ -20,6 +20,11 @@ interface Car : CarInput {
     val carOutput: CarOutput
 
     /**
+     * Горловина бака
+     */
+    val tankMouth: TankMouth
+
+    /**
      * Получить оборудование
      */
     fun getEquipment(): String
@@ -28,4 +33,15 @@ interface Car : CarInput {
      * Внутренний статический класс - номерой знак
      */
     data class Plates(val number: String, val region: Int)
+
+    //внутренний класс - горловина бака
+     sealed class TankMouth {
+        protected lateinit var tank: Tank
+
+        fun connectToTank(tank: Tank) {
+            this.tank = tank
+        }
+        fun open() {}
+        fun close() {}
+    }
 }

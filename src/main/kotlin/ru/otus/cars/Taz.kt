@@ -1,5 +1,7 @@
 package ru.otus.cars
 
+import kotlin.random.Random
+
 object Taz: Car {
     /**
      * Номерной знак
@@ -22,7 +24,7 @@ object Taz: Car {
      * Получить оборудование
      */
     override fun getEquipment(): String = "Крыса"
-
+    override var tankMouth = getRandomMouth()
     /**
      * Руль вправо на [degrees] градусов
      */
@@ -36,4 +38,13 @@ object Taz: Car {
     override fun wheelToLeft(degrees: Int) {
         throw NotImplementedError("Руля нет")
     }
+
+    // Получить рандомную горловину бака
+    private fun getRandomMouth(): Car.TankMouth {
+        return when (Random.nextInt(0, 2)) {
+            0 -> PetrolMouth()
+            else -> LpgMouth()
+        }
+    }
 }
+
