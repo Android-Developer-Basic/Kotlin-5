@@ -25,6 +25,11 @@ interface Car : CarInput {
     fun getEquipment(): String
 
     /**
+     * Заправить машину
+     */
+    fun refuel(liters: Int)
+
+    /**
      * Внутренний статический класс - номерой знак
      */
     data class Plates(val number: String, val region: Int)

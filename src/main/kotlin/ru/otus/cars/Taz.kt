@@ -1,6 +1,6 @@
 package ru.otus.cars
 
-object Taz: Car {
+object Taz : Car {
     /**
      * Номерной знак
      */
@@ -24,6 +24,13 @@ object Taz: Car {
     override fun getEquipment(): String = "Крыса"
 
     /**
+     * Заправить машину
+     */
+    override fun refuel(liters: Int) {
+        throw Exception("Топливной системы нет, ездит на дровах!")
+    }
+
+    /**
      * Руль вправо на [degrees] градусов
      */
     override fun wheelToRight(degrees: Int) {
@@ -36,4 +43,6 @@ object Taz: Car {
     override fun wheelToLeft(degrees: Int) {
         throw NotImplementedError("Руля нет")
     }
+
+    override fun toString() = "Ржавый тазик"
 }

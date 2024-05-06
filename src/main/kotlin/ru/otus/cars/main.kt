@@ -1,5 +1,7 @@
 package ru.otus.cars
 
+import kotlin.random.Random
+
 fun main() {
     println("\n===> drive cars...")
     driveCars()
@@ -16,6 +18,16 @@ fun main() {
     techChecks()
     println("\n===> Taz...")
     println(Taz.color)
+    println("\n===> test fuel station...")
+    fuelStationTest(
+        mutableListOf(
+            Vaz2107.build(Car.Plates("007", 77)),
+            Vaz2108.build(Car.Plates("008", 78)),
+            Taz
+        ).apply {
+            add(this[0]) // дольем еще )
+        }
+    )
 }
 
 fun driveCars() {
@@ -89,5 +101,25 @@ fun repairEngine(car: VazPlatform) {
     when (car.engine) {
         is VazEngine.LADA_2107 -> println("Чистка карбюратора у двигателя объемом ${car.engine.volume} куб.см у машины $car")
         is VazEngine.SAMARA_2108 -> println("Угол зажигания у двигателя объемом ${car.engine.volume} куб.см у машины $car")
+    }
+}
+
+fun fuelStationTest(queue: List<Car>) {
+    println("Заправляем по очереди:")
+    queue.forEachIndexed() { i, car ->
+        println("${i+1}. $car")
+        FuelStation.refuelCer(car, Random.nextInt(1, 100).apply { println("заправляем $this л.") })
+    }
+    println("После заправки:${queue.toSet().joinToString("\n", "\n", "\n")}")
+}
+
+// заправка
+object FuelStation {
+    fun refuelCer(car: Car, liters: Int) {
+        try {
+            car.refuel(liters)
+        } catch (e: Exception) {
+            println(e.message)
+        }
     }
 }
