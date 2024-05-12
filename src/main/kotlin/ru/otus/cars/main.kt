@@ -1,5 +1,7 @@
 package ru.otus.cars
 
+import ru.otus.cars.gasStation.GasStation
+
 fun main() {
     println("\n===> drive cars...")
     driveCars()
@@ -16,6 +18,8 @@ fun main() {
     techChecks()
     println("\n===> Taz...")
     println(Taz.color)
+    println("\n===> fuel... ")
+    getFuel()
 }
 
 fun driveCars() {
@@ -90,4 +94,35 @@ fun repairEngine(car: VazPlatform) {
         is VazEngine.LADA_2107 -> println("Чистка карбюратора у двигателя объемом ${car.engine.volume} куб.см у машины $car")
         is VazEngine.SAMARA_2108 -> println("Угол зажигания у двигателя объемом ${car.engine.volume} куб.см у машины $car")
     }
+}
+
+fun getFuel()
+{
+    val vaz2107 = Vaz2107.build(Car.Plates("123", 77))
+    val vaz2108 = Vaz2108.build(Car.Plates("321", 78))
+
+    var fuel2107 = 20
+    var fuel2108 = 60
+
+    println("До заправки:")
+    println(vaz2107.toString())
+    println(vaz2108.toString())
+    println()
+
+    println("Пытаемся заправить в ВАЗ 2107: $fuel2107 литров")
+    var result = GasStation.fuelCar(vaz2107, 20)
+    println(result)
+    println("Пытаемся заправить ВАЗ 2108 $fuel2108 литров")
+    result = GasStation.fuelCar(vaz2108, 100)
+    println(result)
+
+    println()
+    println("После заправки:")
+    println(vaz2107.toString())
+    println(vaz2108.toString())
+    println()
+
+    println("Пытаемся заправить Taz")
+    result = GasStation.fuelCar(Taz, 5)
+    println(result)
 }

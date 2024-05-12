@@ -1,11 +1,14 @@
 package ru.otus.cars
 
+import ru.otus.cars.fuelSystem.PetrolTankMouth
+import ru.otus.cars.fuelSystem.Tank
+import ru.otus.cars.fuelSystem.WorkingTank
 import kotlin.random.Random
 
 /**
  * Восьмерка
  */
-class Vaz2108 private constructor(color: String) : VazPlatform(color) {
+class Vaz2108 private constructor(color: String, private val tank: Tank) : VazPlatform(color) {
     /**
      * Сам-себе-сборщик ВАЗ 2108.
      */
@@ -18,7 +21,7 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
             }
         }
 
-        override fun build(plates: Car.Plates): Vaz2108 = Vaz2108("Красный").apply {
+        override fun build(plates: Car.Plates): Vaz2108 = Vaz2108("Красный", WorkingTank.create(PetrolTankMouth)).apply {
             this.engine = getRandomEngine()
             this.plates = plates
         }
@@ -63,7 +66,7 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
 
     // Выводим состояние машины
     override fun toString(): String {
-        return "Vaz2108(plates=$plates, wheelAngle=$wheelAngle, currentSpeed=$currentSpeed)"
+        return "Vaz2108(plates=$plates, wheelAngle=$wheelAngle, currentSpeed=$currentSpeed, fuelTankContents=${tank.getContents()})"
     }
 
     /**
@@ -78,5 +81,14 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
         override fun getCurrentSpeed(): Int {
             return this@Vaz2108.currentSpeed
         }
+        override fun getFuelContents(): Int {
+            return this@Vaz2108.tank.getContents()
+        }
     }
+
+    /**
+     * Горловина топливного бака, через которую будем заправлять автомобиль
+     */
+    override val tankMouth: PetrolTankMouth
+        get() = tank.mouth as PetrolTankMouth
 }
