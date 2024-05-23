@@ -5,7 +5,8 @@ import kotlin.random.Random
 /**
  * Семёрочка
  */
-class Vaz2107 private constructor(color: String) : VazPlatform(color) {
+class Vaz2107 private constructor(color: String, private val tank: Tank = TankImpl()) :
+    VazPlatform(color) {
     /**
      * Сам-себе-сборщик ВАЗ 2107.
      */
@@ -20,6 +21,7 @@ class Vaz2107 private constructor(color: String) : VazPlatform(color) {
         override fun build(plates: Car.Plates): Vaz2107 = Vaz2107("Зеленый").apply {
             this.engine = getRandomEngine()
             this.plates = plates
+            this.tankMouth = LpgMouth(tank)
         }
 
         /**
@@ -38,6 +40,9 @@ class Vaz2107 private constructor(color: String) : VazPlatform(color) {
 
     // Переопределяем свойство родителя
     override lateinit var engine: VazEngine
+        private set
+
+    override lateinit var tankMouth: TankMouth
         private set
 
     /**
@@ -59,7 +64,8 @@ class Vaz2107 private constructor(color: String) : VazPlatform(color) {
 
     // Выводим состояние машины
     override fun toString(): String {
-        return "Vaz2107(plates=$plates, wheelAngle=$wheelAngle, currentSpeed=$currentSpeed)"
+        return "Vaz2107(plates=$plates, $tankMouth с ${VazOutput().getCurrentFuel()} л топлива, " +
+                "wheelAngle=$wheelAngle, currentSpeed=$currentSpeed)"
     }
 
     /**
@@ -73,6 +79,10 @@ class Vaz2107 private constructor(color: String) : VazPlatform(color) {
     inner class VazOutput : CarOutput {
         override fun getCurrentSpeed(): Int {
             return this@Vaz2107.currentSpeed
+        }
+
+        override fun getCurrentFuel(): Int {
+            return this@Vaz2107.tank.getContents()
         }
     }
 }

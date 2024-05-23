@@ -13,6 +13,21 @@ object Taz: Car {
     override val color: String = "Ржавый"
 
     /**
+     * Неисправный бак в машине
+     */
+    private val tank = object : Tank {
+        override fun getContents() = 0
+        override fun receiveFuel(liters: Int) {
+            throw IllegalStateException("БАБАХ!!!")
+        }
+    }
+
+    /**
+     * Горловина, установленная над неисправным баком анонимного класса
+     */
+    override var tankMouth = LpgMouth(tank)
+
+    /**
      * Следит за машиной
      */
     override val carOutput: CarOutput
