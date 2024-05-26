@@ -1,5 +1,8 @@
 package ru.otus.cars
 
+import ru.otus.cars.homework.LpgMouth
+import ru.otus.cars.homework.PetrolMouth
+
 fun main() {
     println("\n===> drive cars...")
     driveCars()
@@ -89,5 +92,43 @@ fun repairEngine(car: VazPlatform) {
     when (car.engine) {
         is VazEngine.LADA_2107 -> println("Чистка карбюратора у двигателя объемом ${car.engine.volume} куб.см у машины $car")
         is VazEngine.SAMARA_2108 -> println("Угол зажигания у двигателя объемом ${car.engine.volume} куб.см у машины $car")
+    }
+}
+
+fun getFuel() {
+    val vaz1 = Vaz2107.build(Car.Plates("123", 77))
+    val vaz2 = Vaz2108.build(Car.Plates("321", 78))
+
+    println("Бензобаки: ")
+    println("2107: ${vaz1.carOutput.getFuelContents()}")
+    println("2108: ${vaz2.carOutput.getFuelContents()}")
+}
+
+fun fuelCars() {
+    val cars = listOf(
+        Togliatti.buildCar(Vaz2107, Car.Plates("123", 77)),
+        Togliatti.buildCar(Vaz2108, Car.Plates("123", 77)),
+        Taz
+    )
+    cars.forEach(::fuelCar)
+}
+
+fun fuelCar(car: Car) {
+    println("Заправка: $car")
+    car.tankMouth.open()
+    fuelSafe {
+        when (val mouth = car.tankMouth) {
+            is LpgMouth -> mouth.fuelLpg(10)
+            is PetrolMouth -> mouth.fuelPetrol(20)
+        }
+        println(car.carOutput.getFuelContents())
+    }
+}
+
+inline fun fuelSafe(block: () -> Unit) {
+    try {
+        block()
+    } catch (e: Exception) {
+        println("Таз лопнул: ${e.message}")
     }
 }
