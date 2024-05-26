@@ -1,5 +1,7 @@
 package ru.otus.cars
 
+import ru.otus.cars.homework.TankMouth
+
 /**
  * Машина целиком
  */
@@ -23,6 +25,8 @@ interface Car : CarInput {
      * Получить оборудование
      */
     fun getEquipment(): String
+
+    val tankMouth: TankMouth
 
     /**
      * Внутренний статический класс - номерой знак
