@@ -16,6 +16,9 @@ fun main() {
     techChecks()
     println("\n===> Taz...")
     println(Taz.color)
+
+    val fuelStation = FuelStation()
+    fuelStation.fillFuelCalList()
 }
 
 fun driveCars() {

@@ -8,6 +8,7 @@ interface Car : CarInput {
      * Номерной знак
      */
     val plates: Plates
+    val tankMouth: TankMouth
 
     /**
      * Цвет машины
