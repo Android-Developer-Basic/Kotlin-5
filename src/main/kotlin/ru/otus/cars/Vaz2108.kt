@@ -19,7 +19,7 @@ class Vaz2108 private constructor(color: String, override val tankMouth: TankMou
         }
 
         override fun build(plates: Car.Plates): Vaz2108 = Vaz2108(
-            "Красный",
+            color = "Красный",
             tankMouth = PetrolMouth(
                 tank = Tank()
             )
@@ -75,6 +75,10 @@ class Vaz2108 private constructor(color: String, override val tankMouth: TankMou
      * Делегируем приборы внутреннему классу
      */
     override val carOutput: CarOutput = VazOutput()
+
+    override fun fillFuel(liters: Int) {
+        tankMouth.fillFuel(liters)
+    }
 
     /**
      * Имеет доступ к внутренним данным ЭТОГО ВАЗ-2108!

@@ -73,6 +73,10 @@ class Vaz2107 private constructor(color: String, override val tankMouth: TankMou
      */
     override val carOutput: CarOutput = VazOutput()
 
+    override fun fillFuel(liters: Int) {
+        tankMouth.fillFuel(liters)
+    }
+
     /**
      * Имеет доступ к внутренним данным ЭТОГО ВАЗ-2107!
      */

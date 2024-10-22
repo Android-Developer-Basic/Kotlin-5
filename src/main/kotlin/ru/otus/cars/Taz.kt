@@ -1,6 +1,8 @@
 package ru.otus.cars
 
-object Taz: Car {
+import kotlin.random.Random
+
+object Taz : Car {
     /**
      * Номерной знак
      */
@@ -35,5 +37,21 @@ object Taz: Car {
      */
     override fun wheelToLeft(degrees: Int) {
         throw NotImplementedError("Руля нет")
+    }
+
+    override fun fillFuel(liters: Int) {
+        throw IllegalArgumentException("бак таза взорвался(")
+    }
+
+    override val tankMouth: TankMouth = getRandomMouth()
+
+    private fun getRandomMouth(): TankMouth {
+        val fuelTypes = FuelType.entries
+        val randomType = fuelTypes[Random.nextInt(fuelTypes.size)]
+
+        return when (randomType) {
+            FuelType.PETROL -> PetrolMouth(Tank())
+            FuelType.LPG -> LpgMouth(Tank())
+        }
     }
 }
