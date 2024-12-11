@@ -16,6 +16,20 @@ fun main() {
     techChecks()
     println("\n===> Taz...")
     println(Taz.color)
+    fillCars()
+}
+
+fun fillCars(){
+    val carsLiters = listOf(
+        Pair(Togliatti.buildCar(Vaz2108, Car.Plates("321", 78)), 10),
+        //Pair(Togliatti.buildCar(Vaz2108, Car.Plates("321", 78)), 20),
+        //Pair(Taz, 30),
+        )
+    val fuelStation = FuelStation()
+    //fuelStation.fillCars(carsLiters)
+    val car = carsLiters.first().first
+    fuelStation.fillCar(car, carsLiters.first().second)
+    println(car)
 }
 
 fun driveCars() {

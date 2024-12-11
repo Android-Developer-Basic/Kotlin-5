@@ -1,5 +1,7 @@
 package ru.otus.cars
 
+import ru.otus.cars.impl.TankImpl
+
 object Taz: Car {
     /**
      * Номерной знак
@@ -11,6 +13,12 @@ object Taz: Car {
      * Цвет машины
      */
     override val color: String = "Ржавый"
+
+    /**
+     * топливный бак машины
+     */
+    override val tank: Tank
+        get() = TankImpl.TazTankImpl()
 
     /**
      * Следит за машиной
@@ -35,5 +43,10 @@ object Taz: Car {
      */
     override fun wheelToLeft(degrees: Int) {
         throw NotImplementedError("Руля нет")
+    }
+
+    // Выводим состояние машины
+    override fun toString(): String {
+        return "Taz, топлива в баке ${tank.getContents()}, цвет $color"
     }
 }
