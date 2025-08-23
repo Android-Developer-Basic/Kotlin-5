@@ -5,7 +5,15 @@ package ru.otus.cars
  */
 interface CarOutput {
     /**
-     * Скажи текущую скорость
+     * Скажи текущее состояние
      */
+
+    // Текущая скорость
     fun getCurrentSpeed(): Int
+
+    // Уровень топлива в баке
+    fun getFuelIndicator(): Int
+
+    // Общая информация о баке
+    fun getTankInfo(): String
 }

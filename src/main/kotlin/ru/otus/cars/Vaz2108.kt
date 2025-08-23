@@ -17,10 +17,14 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
                 else -> VazEngine.SAMARA_2108(1500)
             }
         }
+        private fun createTank(): Tank = VazTank(40)
+        private fun createTankMouth(): TankMouth = TankMouth.GasolineMouth()
 
         override fun build(plates: Car.Plates): Vaz2108 = Vaz2108("Красный").apply {
             this.engine = getRandomEngine()
             this.plates = plates
+            setFuelTank(createTank())
+            setTankMouth(createTankMouth())
         }
 
         fun alignWheels(vaz2108: Vaz2108) {
@@ -53,6 +57,7 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
     }
 
     private var currentSpeed: Int = 0 // Скока жмёт
+    private var currentFuelVolume: Int = 0 // Сколько бензина в баке
 
     /**
      * Доступно сборщику
@@ -78,5 +83,8 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
         override fun getCurrentSpeed(): Int {
             return this@Vaz2108.currentSpeed
         }
+
+        override fun getFuelIndicator(): Int = this@Vaz2108.getFuelLevel()
+        override fun getTankInfo(): String = "${this@Vaz2108.getTankCapacity()} л"
     }
 }
