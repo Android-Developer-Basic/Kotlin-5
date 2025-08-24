@@ -9,7 +9,7 @@ import ru.otus.home_work5.carfacory.car.Vaz2107
 import ru.otus.home_work5.carfacory.car.Vaz2108
 import ru.otus.home_work5.carfacory.tank_system.LpgMouth
 import ru.otus.home_work5.carfacory.tank_system.PetrolMouth
-
+import ru.otus.home_work5.gas_station.GasStationImpl
 
 fun main() {
     println("\n===> drive cars...")
@@ -27,6 +27,20 @@ fun main() {
     techChecks()
     println("\n===> Taz...")
     println(Taz.color)
+
+    fuelCars()
+}
+
+fun fuelCars() {
+    val vaz2107 = Togliatti.buildCar(Vaz2107, Car.Plates("123", 77))
+    val vaz2108 = Togliatti.buildCar(Vaz2108, Car.Plates("321", 78))
+
+    val gazProm = GasStationImpl(setOf(PetrolMouth(), LpgMouth()))
+
+    gazProm.refueling(vaz2107)
+    gazProm.refueling(vaz2108)
+    gazProm.refueling(Taz)
+
 }
 
 fun driveCars() {
