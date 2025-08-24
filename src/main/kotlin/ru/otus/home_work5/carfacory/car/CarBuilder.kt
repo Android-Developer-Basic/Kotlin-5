@@ -1,4 +1,4 @@
-package ru.otus.cars
+package ru.otus.home_work5.carfacory.car
 
 /**
  * Сборщик машины
@@ -9,3 +9,4 @@ sealed interface CarBuilder {
      */
     fun build(plates: Car.Plates): Car
 }
+

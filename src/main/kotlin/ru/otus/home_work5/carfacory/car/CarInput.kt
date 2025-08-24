@@ -1,4 +1,4 @@
-package ru.otus.cars
+package ru.otus.home_work5.carfacory.car
 
 /**
  * Рулит машиной

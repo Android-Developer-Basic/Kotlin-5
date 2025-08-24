@@ -1,5 +1,8 @@
-package ru.otus.cars
+package ru.otus.home_work5.carfacory.car
 
+import ru.otus.home_work5.VazEngine
+import ru.otus.home_work5.VazPlatform
+import ru.otus.home_work5.carfacory.tank_system.TankMouth
 import kotlin.random.Random
 
 /**
@@ -9,7 +12,7 @@ class Vaz2107 private constructor(color: String) : VazPlatform(color) {
     /**
      * Сам-себе-сборщик ВАЗ 2107.
      */
-    companion object : CarBuilder {
+    companion object : AbstractCarBuilder() {
         private fun getRandomEngine(): VazEngine {
             return when (Random.nextInt(0, 2)) {
                 0 -> VazEngine.LADA_2107(1300)
@@ -20,6 +23,7 @@ class Vaz2107 private constructor(color: String) : VazPlatform(color) {
         override fun build(plates: Car.Plates): Vaz2107 = Vaz2107("Зеленый").apply {
             this.engine = getRandomEngine()
             this.plates = plates
+            this.tankMouth = getRandomTankMount()
         }
 
         /**
@@ -40,6 +44,8 @@ class Vaz2107 private constructor(color: String) : VazPlatform(color) {
     override lateinit var engine: VazEngine
         private set
 
+    override lateinit var tankMouth: TankMouth
+        private set
     /**
      * Семерка едет так
      */
@@ -73,6 +79,10 @@ class Vaz2107 private constructor(color: String) : VazPlatform(color) {
     inner class VazOutput : CarOutput {
         override fun getCurrentSpeed(): Int {
             return this@Vaz2107.currentSpeed
+        }
+
+        override fun getFuelReserve(): Int {
+            return this@Vaz2107.tankMouth.tankFreeSpace()
         }
     }
 }

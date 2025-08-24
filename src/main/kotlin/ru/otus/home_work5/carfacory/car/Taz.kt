@@ -1,6 +1,8 @@
-package ru.otus.cars
+package ru.otus.home_work5.carfacory.car
 
-object Taz: Car {
+import ru.otus.home_work5.carfacory.tank_system.TankMouth
+
+object Taz : Car {
     /**
      * Номерной знак
      */
@@ -17,6 +19,9 @@ object Taz: Car {
      */
     override val carOutput: CarOutput
         get() = throw NotImplementedError("Приборов нет")
+
+    override val tankMouth: TankMouth
+        get() = throw NotImplementedError("Взрыв топливной системы!")
 
     /**
      * Получить оборудование

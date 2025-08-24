@@ -1,4 +1,15 @@
-package ru.otus.cars
+package ru.otus.home_work5
+
+import ru.otus.home_work5.carfacory.car.Car
+import ru.otus.home_work5.carfacory.car.CarBuilder
+import ru.otus.home_work5.carfacory.car.CarFactory
+import ru.otus.home_work5.carfacory.car.Taz
+import ru.otus.home_work5.carfacory.car.Togliatti
+import ru.otus.home_work5.carfacory.car.Vaz2107
+import ru.otus.home_work5.carfacory.car.Vaz2108
+import ru.otus.home_work5.carfacory.tank_system.LpgMouth
+import ru.otus.home_work5.carfacory.tank_system.PetrolMouth
+
 
 fun main() {
     println("\n===> drive cars...")
@@ -34,7 +45,7 @@ fun innerNestedCheck() {
     val output = vaz.VazOutput() // Создаем новый объект ИЗ ЭКЗЕМПЛЯРА МАШИНЫ
 
     println("Скорость до проверки: ${output.getCurrentSpeed()}") // Выводит 0
-    Vaz2107.test(vaz) // Газуем...
+    Vaz2107.Companion.test(vaz) // Газуем...
     println("Скорость после проверки: ${output.getCurrentSpeed()}") // Выводит случайную скорость
 }
 
@@ -48,7 +59,7 @@ fun garageMake() {
         }
     }
 
-    val vaz = garage.buildCar(Vaz2107, Car.Plates("500", 50))
+    val vaz = garage.buildCar(Vaz2107.Companion, Car.Plates("500", 50))
     println(vaz.toString())
 }
 
