@@ -74,5 +74,17 @@ class Vaz2107 private constructor(color: String) : VazPlatform(color) {
         override fun getCurrentSpeed(): Int {
             return this@Vaz2107.currentSpeed
         }
+
+        override fun fuelLevel(): Int {
+            return tank.fuelLevel
+        }
+    }
+
+    override lateinit var tank: Tank
+    override lateinit var tankMouth: TankMouth
+
+    fun installTank(tank: Tank, tankMouth: TankMouth) {
+        this.tank = tank
+        this.tankMouth = tankMouth
     }
 }
