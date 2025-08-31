@@ -17,6 +17,11 @@ object Togliatti : CarFactory {
     private fun buildVaz2107(plates: Car.Plates): Car {
         println("Запил ${Vaz2107.MODEL} в Тольятти...")
         val vaz = Vaz2107.build(plates)
+
+        val tank = TankImpl(capacity = 50)
+        val mouth = GasMouth
+        vaz.installTank(tank, mouth)
+
         println("Проверяем тачку...")
         Vaz2107.test(vaz)
         vaz.drdrdrdrdr()
@@ -26,6 +31,11 @@ object Togliatti : CarFactory {
     private fun buildVaz2108(plates: Car.Plates): Car {
         println("Запил ${Vaz2108.MODEL} в Тольятти...")
         val vaz = Vaz2108.build(plates)
+
+        val tank = TankImpl(capacity = 55)
+        val mouth = PetrolMouth
+        vaz.installTank(tank, mouth)
+
         println("Сход-развал...")
         Vaz2108.alignWheels(vaz)
         vaz.zhzhzhzh()

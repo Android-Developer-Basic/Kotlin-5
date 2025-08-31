@@ -28,4 +28,8 @@ interface Car : CarInput {
      * Внутренний статический класс - номерой знак
      */
     data class Plates(val number: String, val region: Int)
+
+    val tank: Tank
+    val tankMouth: TankMouth
+    fun fuelLevel(): Int = tank.fuelLevel
 }
