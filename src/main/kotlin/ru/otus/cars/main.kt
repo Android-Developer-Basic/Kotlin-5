@@ -16,6 +16,7 @@ fun main() {
     techChecks()
     println("\n===> Taz...")
     println(Taz.color)
+    refuelCars()
 }
 
 fun driveCars() {
@@ -31,7 +32,7 @@ fun driveCars() {
 
 fun innerNestedCheck() {
     val vaz = Vaz2107.build(Car.Plates("123", 77))
-    val output = vaz.VazOutput() // Создаем новый объект ИЗ ЭКЗЕМПЛЯРА МАШИНЫ
+    val output = (vaz as Vaz2107).VazOutput() // Создаем новый объект ИЗ ЭКЗЕМПЛЯРА МАШИНЫ
 
     println("Скорость до проверки: ${output.getCurrentSpeed()}") // Выводит 0
     Vaz2107.test(vaz) // Газуем...
@@ -78,8 +79,8 @@ fun techChecks() {
     val vaz1 = Vaz2107.build(Car.Plates("123", 77))
     val vaz2 = Vaz2108.build(Car.Plates("321", 78))
 
-    repairEngine(vaz1)
-    repairEngine(vaz2)
+    repairEngine(vaz1 as VazPlatform)
+    repairEngine(vaz2 as VazPlatform)
 }
 
 fun repairEngine(car: VazPlatform) {
@@ -89,5 +90,27 @@ fun repairEngine(car: VazPlatform) {
     when (car.engine) {
         is VazEngine.LADA_2107 -> println("Чистка карбюратора у двигателя объемом ${car.engine.volume} куб.см у машины $car")
         is VazEngine.SAMARA_2108 -> println("Угол зажигания у двигателя объемом ${car.engine.volume} куб.см у машины $car")
+    }
+}
+
+fun refuelCars() {
+    val cars: List<Car> = listOf(
+        Vaz2107.build(Car.Plates("123", 77)),
+        Vaz2108.build(Car.Plates("321", 78)),
+        Taz
+    )
+
+    val station = FuelStation()
+
+    for (car in cars) {
+        println("Собираемся заправить $car, Кол-во топлива: ${car.tankMouth.getContents()}")
+        val refuelResult = station.refuel(car.tankMouth, 10)
+        println("Результат заправки $refuelResult, Кол-во топлива: ${car.tankMouth.getContents()}, Машина: $car")
+    }
+
+    for (car in cars) {
+        println("Собираемся заправить $car, Кол-во топлива: ${car.tankMouth.getContents()}")
+        val refuelResult = station.refuel(car.tankMouth, 15)
+        println("Результат заправки $refuelResult, Кол-во топлива: ${car.tankMouth.getContents()}, Машина: $car")
     }
 }
