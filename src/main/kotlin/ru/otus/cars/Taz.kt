@@ -36,4 +36,7 @@ object Taz: Car {
     override fun wheelToLeft(degrees: Int) {
         throw NotImplementedError("Руля нет")
     }
+
+    override val tankMouth: TankMouth
+       get() = throw NotImplementedError("Бензобака нет")
 }

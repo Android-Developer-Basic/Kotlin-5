@@ -21,6 +21,7 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
         override fun build(plates: Car.Plates): Vaz2108 = Vaz2108("Красный").apply {
             this.engine = getRandomEngine()
             this.plates = plates
+            this.tankMouth = PetrolMouth(tank)
         }
 
         fun alignWheels(vaz2108: Vaz2108) {
@@ -63,7 +64,7 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
 
     // Выводим состояние машины
     override fun toString(): String {
-        return "Vaz2108(plates=$plates, wheelAngle=$wheelAngle, currentSpeed=$currentSpeed)"
+        return "Vaz2108(plates=$plates, wheelAngle=$wheelAngle, currentSpeed=$currentSpeed, fuelContents=${tank.getContents()})"
     }
 
     /**
@@ -78,5 +79,11 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
         override fun getCurrentSpeed(): Int {
             return this@Vaz2108.currentSpeed
         }
+        override fun getFuelContents(): Int {
+            return this@Vaz2108.tank.getContents()
+        }
     }
+
+    private val tank = CarTank(43)
+    override lateinit var tankMouth: TankMouth
 }
