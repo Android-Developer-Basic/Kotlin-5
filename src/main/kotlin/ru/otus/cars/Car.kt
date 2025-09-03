@@ -20,6 +20,11 @@ interface Car : CarInput {
     val carOutput: CarOutput
 
     /**
+     * Топливная система авто
+     */
+    val fuelSystem:FuelSystem
+
+    /**
      * Получить оборудование
      */
     fun getEquipment(): String

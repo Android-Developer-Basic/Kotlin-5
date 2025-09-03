@@ -36,4 +36,6 @@ object Taz: Car {
     override fun wheelToLeft(degrees: Int) {
         throw NotImplementedError("Руля нет")
     }
+
+    override val fuelSystem: FuelSystem = FuelSystem(Type.GAS)
 }
