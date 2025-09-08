@@ -21,20 +21,22 @@ data class TankMouth(val type:Type, val tank:Tank, val car:Car){
      * @param level - сколько залить в бак
      * @return сколько в баке после заправки
      */
-    fun addFuel(level: Int): Int {
+    fun addFuel(level: Int): Boolean {
         if(car is Taz){
             throw RuntimeException("ТАЗ НЕ УМЕЕТ ЗАПРАВЛЯТЬСЯ")
         }
+        val fuelLevelBefore = this.tank.level
         this.tank.level += level
-        return this.tank.level
+        return (this.tank.level - fuelLevelBefore > 0)
     }
 }
 
-class FuelSystem constructor(fuelType:Type, car:Car = Taz){
-    private var     tank:Tank
-    var             tankMouth: TankMouth
-
-    init {
+class FuelSystem {
+    private val     car:Car
+    private var     tank:Tank               // Топливный бак
+    var             tankMouth: TankMouth    // Горловина бака
+    constructor(fuelType:Type, car:Car = Taz){
+        this.car = car
         when(fuelType){
             Type.FUEL -> {
                 this.tank = FuelTank()
@@ -43,7 +45,7 @@ class FuelSystem constructor(fuelType:Type, car:Car = Taz){
                 this.tank = GasTank()
             }
         }
-        this.tankMouth = TankMouth(fuelType, this.tank, car)
+        this.tankMouth = TankMouth(fuelType, this.tank, this.car)
     }
 }
 

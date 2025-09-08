@@ -65,7 +65,7 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
     // Выводим состояние машины
     override fun toString(): String {
         return "Vaz2108(plates=$plates, wheelAngle=$wheelAngle, currentSpeed=$currentSpeed, " +
-                "fuelType=${fuelSystem.tankMouth.type}, fuelLevel=\${fuelSystem.tankMouth.tank.level)"
+                "fuelType=${fuelSystem.tankMouth.type}, fuelLevel=${fuelSystem.tankMouth.tank.level}"
     }
 
     /**

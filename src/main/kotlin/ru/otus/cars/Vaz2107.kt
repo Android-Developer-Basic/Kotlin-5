@@ -68,6 +68,9 @@ class Vaz2107 private constructor(color: String) : VazPlatform(color) {
      */
     override val carOutput: CarOutput = VazOutput()
 
+    /**
+     * Топливная система ВАЗ 2107
+     */
     override lateinit var fuelSystem: FuelSystem
         private set
 

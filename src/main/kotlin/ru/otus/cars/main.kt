@@ -18,18 +18,26 @@ fun main() {
     println(Taz.color)
 
     val car2107:Car = Vaz2107.build(Car.Plates("а007аа", 152))
+    val car2108:Car = Vaz2108.build(Car.Plates("а008аа", 152))
+
+    val cars:List<Car> = mutableListOf(car2107, car2108)
+
     println("До заправки: $car2107")
-    println("Заправляем на 10 литров")
+    println("Заправляем \"Сами\" на 10 литров")
     car2107.fuelSystem.tankMouth.addFuel(10)
     println("После заправки $car2107")
 
-    val car2108:Car = Vaz2108.build(Car.Plates("а008аа", 152))
     println("До заправки: $car2108")
-    println("Заправляем на 15 литров")
+    println("Заправляем \"Сами\" на 15 литров")
     car2108.fuelSystem.tankMouth.addFuel(15)
     println("После заправки $car2108")
 
-    Taz.fuelSystem.tankMouth.addFuel(5)
+    println("\nЗаправляемся на заправке:")
+    for(car in cars){
+        FuelStation.refuelCar(car, 10)
+    }
+
+    //Taz.fuelSystem.tankMouth.addFuel(5)
 
 }
 
