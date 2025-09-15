@@ -20,7 +20,7 @@ class Vaz2107 private constructor(color: String) : VazPlatform(color) {
         override fun build(plates: Car.Plates): Vaz2107 = Vaz2107("Зеленый").apply {
             this.engine = getRandomEngine()
             this.plates = plates
-            this.fuelSystem = FuelSystem(Type.GAS, this)
+            this.fuelSystem = FuelSystem(Type.GAS)
         }
 
         /**

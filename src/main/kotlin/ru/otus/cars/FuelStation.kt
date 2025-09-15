@@ -1,6 +1,6 @@
 package ru.otus.cars
 
-import java.lang.Exception
+import java.lang.RuntimeException
 
 class FuelStation {
     companion object {
@@ -9,13 +9,16 @@ class FuelStation {
         fun refuelCar(car: Car, litres: Int) {
             println("Заправка авто: ${car.toString()} на ${litres.toString()} литров")
             currentCar = car
+            if( currentCar is Taz){
+                throw RuntimeException("ТАЗ НЕ УМЕЕТ ЗАПРАВЛЯТЬСЯ")
+            }
 
             val isOk = when(car.fuelSystem.tankMouth.type){
                 Type.GAS, Type.FUEL -> {
                     addFuel(litres)
                     true
                 }
-                else -> {
+                 else -> {
                     println("Не обслуживаентся")
                     false
                 }
@@ -30,11 +33,7 @@ class FuelStation {
         }
 
         private fun addFuel(litres: Int): Boolean {
-            return try {
-                currentCar.fuelSystem.tankMouth.addFuel(litres)
-            } catch (e:Exception){
-                false
-            }
+            return currentCar.fuelSystem.tankMouth.addFuel(litres)
         }
 
     }

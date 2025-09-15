@@ -1,7 +1,5 @@
 package ru.otus.cars
 
-import java.lang.RuntimeException
-
 /**
  * Тип топлива: Бензин или Газ
  */
@@ -15,16 +13,13 @@ interface Tank{
 /**
  * Горловина к топливному баку
  */
-data class TankMouth(val type:Type, val tank:Tank, val car:Car){
+data class TankMouth(val type:Type, val tank:Tank){
     /**
      * Заправка бака топливом через горловину
      * @param level - сколько залить в бак
      * @return сколько в баке после заправки
      */
     fun addFuel(level: Int): Boolean {
-        if(car is Taz){
-            throw RuntimeException("ТАЗ НЕ УМЕЕТ ЗАПРАВЛЯТЬСЯ")
-        }
         val fuelLevelBefore = this.tank.level
         this.tank.level += level
         return (this.tank.level - fuelLevelBefore > 0)
@@ -32,11 +27,9 @@ data class TankMouth(val type:Type, val tank:Tank, val car:Car){
 }
 
 class FuelSystem {
-    private val     car:Car
     private var     tank:Tank               // Топливный бак
     var             tankMouth: TankMouth    // Горловина бака
-    constructor(fuelType:Type, car:Car = Taz){
-        this.car = car
+    constructor(fuelType:Type){
         when(fuelType){
             Type.FUEL -> {
                 this.tank = FuelTank()
@@ -45,7 +38,7 @@ class FuelSystem {
                 this.tank = GasTank()
             }
         }
-        this.tankMouth = TankMouth(fuelType, this.tank, this.car)
+        this.tankMouth = TankMouth(fuelType, this.tank)
     }
 }
 

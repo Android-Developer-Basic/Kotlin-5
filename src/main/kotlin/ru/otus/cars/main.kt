@@ -1,5 +1,7 @@
 package ru.otus.cars
 
+import java.lang.Exception
+
 fun main() {
     println("\n===> drive cars...")
     driveCars()
@@ -34,7 +36,11 @@ fun main() {
 
     println("\nЗаправляемся на заправке:")
     for(car in cars){
-        FuelStation.refuelCar(car, 10)
+        try {
+            FuelStation.refuelCar(car, 10)
+        }catch (e:Exception){
+            println("${car.toString()} не заправлена" )
+        }
     }
 
     //Taz.fuelSystem.tankMouth.addFuel(5)
