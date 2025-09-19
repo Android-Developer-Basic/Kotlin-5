@@ -18,6 +18,13 @@ object Taz: Car {
     override val carOutput: CarOutput
         get() = throw NotImplementedError("Приборов нет")
 
+
+    /**
+     * Бензобак
+     */
+    override val tankMouth: TankMouth
+        get() = throw NotImplementedError("Бензобака нет")
+
     /**
      * Получить оборудование
      */
@@ -35,5 +42,13 @@ object Taz: Car {
      */
     override fun wheelToLeft(degrees: Int) {
         throw NotImplementedError("Руля нет")
+    }
+
+    override fun refuel(liters: Int) {
+        throw NotImplementedError("БА-БАХ!!!")
+    }
+
+    override fun toString(): String {
+        return "TAZ 666"
     }
 }

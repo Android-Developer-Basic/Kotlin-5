@@ -14,6 +14,9 @@ abstract class VazPlatform(override val color: String) : Car {
 
     // Абстрактное свойство двигателя
     abstract val engine: VazEngine
+
+    // Абстрактное свойство типа топливной системы, определяемой горловиной бака
+    abstract val fuelSystem : VazFuelSystem
 }
 
 // Перечисление двигателей ВАЗ
@@ -23,4 +26,43 @@ sealed class VazEngine {
 
     data class LADA_2107(override val volume: Int) : VazEngine()
     data class SAMARA_2108(override val volume: Int) : VazEngine()
+}
+
+// Перечисление горловин бака
+sealed class TankMouth {
+    class PetrolMouth: TankMouth()
+    class GasMouth: TankMouth()
+}
+
+
+// Топливная система
+class VazFuelSystem(private val mouthType: TankMouth) {
+
+    private val tank = Tank()
+
+    fun refuel(liters: Int) {
+        when (mouthType) {
+            is TankMouth.PetrolMouth -> {
+                println("Залили $liters литров бензина")
+                tank.addFuel(liters)
+            }
+            is TankMouth.GasMouth -> {
+                println("Залили $liters литров газа")
+                tank.addFuel(liters)
+            }
+        }
+    }
+
+    fun getFuelLevel(): Int {
+        return tank.getFuelLevel()
+    }
+
+    private class Tank {
+        var currentFuelLevel: Int = 0
+        fun getFuelLevel(): Int = currentFuelLevel
+
+        fun addFuel(liters: Int) {
+            currentFuelLevel += liters
+        }
+    }
 }
