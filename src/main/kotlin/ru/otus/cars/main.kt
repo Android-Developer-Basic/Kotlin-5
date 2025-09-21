@@ -15,6 +15,8 @@ fun main() {
     println("\n===> tech checks...")
     techChecks()
     println("\n===> Taz...")
+    println("\n===> Заправка машин...")
+    refuelCars()
     println(Taz.color)
 }
 
@@ -75,8 +77,8 @@ fun getColor() {
 }
 
 fun techChecks() {
-    val vaz1 = Vaz2107.build(Car.Plates("123", 77))
-    val vaz2 = Vaz2108.build(Car.Plates("321", 78))
+    val vaz1 = Vaz2107.build(Car.Plates("123", 77)) as VazPlatform
+    val vaz2 = Vaz2108.build(Car.Plates("321", 78)) as VazPlatform
 
     repairEngine(vaz1)
     repairEngine(vaz2)
@@ -89,5 +91,45 @@ fun repairEngine(car: VazPlatform) {
     when (car.engine) {
         is VazEngine.LADA_2107 -> println("Чистка карбюратора у двигателя объемом ${car.engine.volume} куб.см у машины $car")
         is VazEngine.SAMARA_2108 -> println("Угол зажигания у двигателя объемом ${car.engine.volume} куб.см у машины $car")
+    }
+}
+
+/**
+ * Объект-заправка
+ */
+object GasStation {
+    fun refuel(car: Car, liters: Int) {
+        println("Заправляем машину ${car.plates.number}...")
+        try {
+            car.tankMouth.refuel(liters)
+            println("Успешно заправлено!")
+        } catch (e: Exception) {
+            println("Ошибка заправки: ${e.message}")
+        }
+    }
+
+    fun refuelAll(cars: List<Car>, liters: Int) {
+        cars.forEach { refuel(it, liters) }
+    }
+}
+
+fun refuelCars() {
+    val cars = listOf(
+        Vaz2107.build(Car.Plates("123", 77)),
+        Vaz2108.build(Car.Plates("321", 78)),
+        Taz
+    )
+
+    println("До заправки:")
+    cars.forEach { car ->
+        println("Машина ${car.plates.number}: ${car.carOutput.getFuelLevel()} литров")
+    }
+
+    println("\nЗаправляем по 20 литров:")
+    GasStation.refuelAll(cars, 20)
+
+    println("\nПосле заправки:")
+    cars.forEach { car ->
+        println("Машина ${car.plates.number}: ${car.carOutput.getFuelLevel()} литров")
     }
 }

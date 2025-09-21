@@ -1,6 +1,13 @@
 package ru.otus.cars
 
 object Taz: Car {
+    private val tank = Tank()
+
+    /**
+     * Горловина бака (взрывающаяся)
+     */
+    override val tankMouth: TankMouth = tank.ExplodingMouth()
+
     /**
      * Номерной знак
      */
@@ -15,8 +22,15 @@ object Taz: Car {
     /**
      * Следит за машиной
      */
-    override val carOutput: CarOutput
-        get() = throw NotImplementedError("Приборов нет")
+    override val carOutput: CarOutput = object : CarOutput {
+        override fun getCurrentSpeed(): Int {
+            throw NotImplementedError("Приборов нет")
+        }
+
+        override fun getFuelLevel(): Int {
+            throw NotImplementedError("Приборов нет")
+        }
+    }
 
     /**
      * Получить оборудование

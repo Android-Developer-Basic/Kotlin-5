@@ -2,11 +2,15 @@ package ru.otus.cars
 
 abstract class VazPlatform(override val color: String) : Car {
     // Положение руля. Доступно только внутри класса и наследникам
-    protected var wheelAngle: Int = 0 // Положение руля
+    protected var wheelAngle: Int = 0
+
+    // Топливный бак
+    protected val tank = Tank()
+
+    protected var currentSpeed: Int = 0
 
     // Реализация интерфейса CarInput
     override fun wheelToRight(degrees: Int) { wheelAngle += degrees }
-    // Реализация интерфейса CarInput
     override fun wheelToLeft(degrees: Int) { wheelAngle -= degrees }
 
     // Получить оборудование
@@ -14,13 +18,13 @@ abstract class VazPlatform(override val color: String) : Car {
 
     // Абстрактное свойство двигателя
     abstract val engine: VazEngine
-}
 
-// Перечисление двигателей ВАЗ
-sealed class VazEngine {
-    // Объем двигателя можно задать при производстве
-    abstract val volume: Int
+    // Абстрактное свойство для carOutput (реализуется в дочерних классах)
+    abstract override val carOutput: CarOutput
 
-    data class LADA_2107(override val volume: Int) : VazEngine()
-    data class SAMARA_2108(override val volume: Int) : VazEngine()
+    // Горловина будет реализована в дочерних классах
+    abstract override val tankMouth: TankMouth
+
+    // Метод для получения уровня топлива из бака
+    fun getFuelLevel(): Int = tank.getFuelLevel()
 }

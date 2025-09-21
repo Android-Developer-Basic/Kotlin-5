@@ -6,6 +6,9 @@ import kotlin.random.Random
  * Семёрочка
  */
 class Vaz2107 private constructor(color: String) : VazPlatform(color) {
+    // Реализуем абстрактное свойство
+    override val carOutput: CarOutput = VazOutput()
+
     /**
      * Сам-себе-сборщик ВАЗ 2107.
      */
@@ -17,10 +20,11 @@ class Vaz2107 private constructor(color: String) : VazPlatform(color) {
             }
         }
 
-        override fun build(plates: Car.Plates): Vaz2107 = Vaz2107("Зеленый").apply {
-            this.engine = getRandomEngine()
-            this.plates = plates
-        }
+        override fun build(plates: Car.Plates): Vaz2107 =
+            Vaz2107("Зеленый").apply {
+                this.engine = getRandomEngine()
+                this.plates = plates
+            }
 
         /**
          * Проверь, ездит или нет
@@ -48,8 +52,6 @@ class Vaz2107 private constructor(color: String) : VazPlatform(color) {
         println("Др-др-др-др....")
     }
 
-    private var currentSpeed: Int = 0 // Скока жмёт
-
     /**
      * Доступно сборщику
      * @see [build]
@@ -57,15 +59,13 @@ class Vaz2107 private constructor(color: String) : VazPlatform(color) {
     override lateinit var plates: Car.Plates
         private set
 
+    // Горловина для газа
+    override val tankMouth: TankMouth = tank.LPGMouth()
+
     // Выводим состояние машины
     override fun toString(): String {
-        return "Vaz2107(plates=$plates, wheelAngle=$wheelAngle, currentSpeed=$currentSpeed)"
+        return "Vaz2107(plates=$plates, wheelAngle=$wheelAngle, currentSpeed=$currentSpeed, fuelLevel=${carOutput.getFuelLevel()})"
     }
-
-    /**
-     * Делегируем приборы внутреннему классу
-     */
-    override val carOutput: CarOutput = VazOutput()
 
     /**
      * Имеет доступ к внутренним данным ЭТОГО ВАЗ-2107!
@@ -73,6 +73,10 @@ class Vaz2107 private constructor(color: String) : VazPlatform(color) {
     inner class VazOutput : CarOutput {
         override fun getCurrentSpeed(): Int {
             return this@Vaz2107.currentSpeed
+        }
+
+        override fun getFuelLevel(): Int {
+            return this@Vaz2107.getFuelLevel() // Используем метод из VazPlatform
         }
     }
 }
