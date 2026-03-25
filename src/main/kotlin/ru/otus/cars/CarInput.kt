@@ -13,4 +13,9 @@ interface CarInput {
      * Руль влево на [degrees] градусов
      */
     fun wheelToLeft(degrees: Int)
+
+    /**
+     * Заправить бак топливом
+     */
+    fun refuel(liters: Int)
 }
