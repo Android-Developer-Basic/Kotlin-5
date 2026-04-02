@@ -25,10 +25,10 @@
 - Топливная система должна устанавливаться "специалистом" - сборщиком нашей машины
 
 Интерфейс бака и его связь с другими компонентами может выглядеть, например, вот так:
-![LCE state diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Android-Developer-Basic/Kotlin-6/master/doc/Tank.puml)
+![Топливная система](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Android-Developer-Basic/Kotlin-6/master/doc/Tank.puml)
 
 Полный интерфейс машины (для водителя) должен выглядеть вот так:
-![LCE state diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Android-Developer-Basic/Kotlin-6/master/doc/Car.puml)
+![Интерфейс машины](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Android-Developer-Basic/Kotlin-6/master/doc/Car.puml)
 
 Сделайте машинам топливную систему:
 
