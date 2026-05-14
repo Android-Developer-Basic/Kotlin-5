@@ -16,6 +16,8 @@ fun main() {
     techChecks()
     println("\n===> Taz...")
     println(Taz.color)
+    println("\n===> fill cars...")
+    fillCars()
 }
 
 fun driveCars() {
@@ -89,5 +91,27 @@ fun repairEngine(car: VazPlatform) {
     when (car.engine) {
         is VazEngine.LADA_2107 -> println("Чистка карбюратора у двигателя объемом ${car.engine.volume} куб.см у машины $car")
         is VazEngine.SAMARA_2108 -> println("Угол зажигания у двигателя объемом ${car.engine.volume} куб.см у машины $car")
+    }
+}
+
+fun fillCars() {
+    val cars = listOf(
+        Togliatti.buildCar(Vaz2107, Car.Plates("777", 77)),
+        Togliatti.buildCar(Vaz2108, Car.Plates("888", 78)),
+        Taz,
+    )
+
+    println("До заправки:")
+    cars.forEach { car ->
+        println(car)
+    }
+
+    cars.forEach { car ->
+        GasStation.fill(car, liters = 30)
+    }
+
+    println("После заправки:")
+    cars.forEach { car ->
+        println(car)
     }
 }
