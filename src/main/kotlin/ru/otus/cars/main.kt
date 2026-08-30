@@ -1,5 +1,7 @@
 package ru.otus.cars
 
+import ru.otus.cars.fuelSystem.FillingStation
+
 fun main() {
     println("\n===> drive cars...")
     driveCars()
@@ -16,6 +18,21 @@ fun main() {
     techChecks()
     println("\n===> Taz...")
     println(Taz.color)
+
+    refuel()
+
+}
+
+fun refuel() {
+    val fillingStation = FillingStation()
+    fillingStation.refuel(
+        listOf(
+            Vaz2107.build(Car.Plates("1234", 123)),
+            Vaz2108.build(Car.Plates("567", 456)),
+            Taz
+        ),
+        36
+    )
 }
 
 fun driveCars() {

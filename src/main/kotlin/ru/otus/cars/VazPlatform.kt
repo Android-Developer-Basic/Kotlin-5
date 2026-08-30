@@ -1,5 +1,7 @@
 package ru.otus.cars
 
+import ru.otus.cars.fuelSystem.Tank
+
 abstract class VazPlatform(override val color: String) : Car {
     // Положение руля. Доступно только внутри класса и наследникам
     protected var wheelAngle: Int = 0 // Положение руля
@@ -14,6 +16,8 @@ abstract class VazPlatform(override val color: String) : Car {
 
     // Абстрактное свойство двигателя
     abstract val engine: VazEngine
+
+    protected abstract val tank: Tank
 }
 
 // Перечисление двигателей ВАЗ
