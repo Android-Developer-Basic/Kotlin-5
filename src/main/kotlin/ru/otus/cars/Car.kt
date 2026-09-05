@@ -20,6 +20,13 @@ interface Car : CarInput {
     val carOutput: CarOutput
 
     /**
+     * Топливная система
+     */
+    val tank: Tank
+    val mouth: TankMouth
+    fun refuel(amount: Double)
+
+    /**
      * Получить оборудование
      */
     fun getEquipment(): String
