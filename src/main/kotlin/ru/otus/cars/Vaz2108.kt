@@ -7,6 +7,19 @@ import kotlin.random.Random
  */
 class Vaz2108 private constructor(color: String) : VazPlatform(color) {
     /**
+     * Топливная система: бак и горловина создаются вместе.
+     * Бак спрятан — доступ только через горловину и CarOutput.
+     */
+    override val tank: Tank = Tank.create()
+    override val mouth: TankMouth = GasolineMouth(tank)
+
+    /**
+     * Заправка через горловину
+     */
+    override fun refuel(amount: Double) {
+        mouth.refuel(amount)
+    }
+    /**
      * Сам-себе-сборщик ВАЗ 2108.
      */
     companion object : CarBuilder {
@@ -21,11 +34,16 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
         override fun build(plates: Car.Plates): Vaz2108 = Vaz2108("Красный").apply {
             this.engine = getRandomEngine()
             this.plates = plates
+            this.tank
+            this.mouth.refuel(10.0) //зальем топлива в первый раз
         }
 
         fun alignWheels(vaz2108: Vaz2108) {
             println("Ваз 2108 выравнивает колёса... ")
             vaz2108.wheelAngle = 0
+            vaz2108.refuel(Random.nextDouble(70.0, 100.0))
+//            println("Lyem toplivo v Vaz2108, itogo ${vaz2108.tank.getGasolineLevel()} litrov") // не очень понятно почему так работает, ведь tank приватный
+            println("Zapravili Vaz2108 na ${vaz2108.carOutput.getFuelLevel()} litrov")
         }
 
         /**
@@ -53,7 +71,6 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
     }
 
     private var currentSpeed: Int = 0 // Скока жмёт
-
     /**
      * Доступно сборщику
      * @see [build]
@@ -63,7 +80,7 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
 
     // Выводим состояние машины
     override fun toString(): String {
-        return "Vaz2108(plates=$plates, wheelAngle=$wheelAngle, currentSpeed=$currentSpeed)"
+        return "Vaz2108(plates=$plates, wheelAngle=$wheelAngle, currentSpeed=$currentSpeed, currentFuel=${carOutput.getFuelLevel()})"
     }
 
     /**
@@ -77,6 +94,9 @@ class Vaz2108 private constructor(color: String) : VazPlatform(color) {
     inner class VazOutput : CarOutput {
         override fun getCurrentSpeed(): Int {
             return this@Vaz2108.currentSpeed
+        }
+        override fun getFuelLevel(): Double {
+            return this@Vaz2108.tank.getGasolineLevel()
         }
     }
 }
